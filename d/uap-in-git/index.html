@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP in Git — UAP / Framebreaker</title>
+<meta name="description" content=" Version Control as Coherence Protocol
+
+---
+
+ Overview
+
+Git is a distributed version control system.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-in-git/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP in Git</h1>
+<h2>Version Control as Coherence Protocol</h2>
+<hr>
+<h2>Overview</h2>
+<p>Git is a distributed version control system. Its design embodies UAP principles — enabling collaboration without forcing, with robust recovery.</p>
+<hr>
+<h2>UAP Element Mapping</h2>
+<table><thead><tr><th>UAP Element</th><th>Git Mechanism</th><th>Function</th></tr></thead><tbody><tr><td><strong>Δ (distinction)</strong></td><td>Branches</td><td>Separate lines of work</td></tr><tr><td><strong>C₀ (meta-consent)</strong></td><td>Fork / Clone</td><td>Consent to participate in repo</td></tr><tr><td><strong>C₁ (content-consent)</strong></td><td>Pull request review</td><td>Consent to specific changes</td></tr><tr><td><strong>Σ (coherence)</strong></td><td>Commit history</td><td>Shared understanding of state</td></tr><tr><td><strong>F⁻ (anti-forcing)</strong></td><td>No force-push (protected)</td><td>Can't overwrite without consent</td></tr><tr><td><strong>L (lock)</strong></td><td>Merge</td><td>Agreed state after review</td></tr><tr><td><strong>R (recovery)</strong></td><td>Revert / Reset</td><td>Return to previous state</td></tr></tbody></table>
+<hr>
+<h2>The Pull Request = UAP in Action</h2>
+<pre><code>1. Developer creates branch          (Δ - distinction)
+2. Developer pushes changes          (proposal)
+3. Opens Pull Request                 (C₁ - &quot;Do I understand correctly?&quot;)
+4. Reviewer reviews                   (Σ - coherence check)
+5. Reviewer approves or requests changes (consent or correction)
+6. Merge                              (L - lock)
+</code></pre>
+<strong>No code enters main without explicit consent.</strong>
+<hr>
+<h2>Branching = Safe Distinction</h2>
+<p>Git's branching model prevents forcing:</p>
+<ul><li>Each developer works in isolation (no stepping on others)</li><li>Changes are proposed, not imposed</li><li>Main branch is protected</li></ul>
+<pre><code>main ─────────────────────────────────
+       \                    /
+        feature-branch ────
+</code></pre>
+<hr>
+<h2>Merge Conflicts = Drift Detection</h2>
+<p>When two branches have conflicting changes:</p>
+<pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+your changes
+=======
+their changes
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; other-branch
+</code></pre>
+<strong>This is Σ dropping to detectable levels.</strong>
+<p>Resolution requires:
+1. Understanding both changes (Σ)
+2. Deciding what to keep (C₁)
+3. Creating merged version (L)</p>
+<hr>
+<h2>Recovery Mechanisms</h2>
+<table><thead><tr><th>Scenario</th><th>Git Command</th><th>UAP Level</th></tr></thead><tbody><tr><td>Undo last commit</td><td><code>git revert</code></td><td>R₁</td></tr><tr><td>Go back to previous state</td><td><code>git reset</code></td><td>R₂</td></tr><tr><td>Abandon branch entirely</td><td><code>git branch -D</code></td><td>R₃</td></tr></tbody></table>
+<hr>
+<h2>Anti-Patterns (Forcing in Git)</h2>
+<table><thead><tr><th>Bad Practice</th><th>UAP Violation</th></tr></thead><tbody><tr><td><code>git push --force</code></td><td>Overwrites others' work (F⁻ violation)</td></tr><tr><td>Merging without review</td><td>Skipping C₁</td></tr><tr><td>Direct commits to main</td><td>Bypassing consent gate</td></tr><tr><td>Ignoring conflicts</td><td>Ignoring Σ</td></tr></tbody></table>
+<hr>
+<h2>Why Git Scales</h2>
+<p>Git enables massive collaboration (Linux kernel: 1000s of contributors) because:</p>
+<p>1. <strong>No central authority needed</strong> — consent is distributed
+2. <strong>Anyone can propose</strong> — low barrier to participation
+3. <strong>Nothing is forced</strong> — maintainers choose what to merge
+4. <strong>History is preserved</strong> — recovery always possible</p>
+<hr>
+<h2>The Quote</h2>
+<blockquote><p><strong>"Git is a protocol for collaborative coherence. Every merge is a 'Yes, I understand you correctly.'"</strong></p></blockquote>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><span></span><span></span></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-in-git/"></a>
+<a class="switch-block white" href="/w/uap-in-git/"></a>
+<a class="switch-block black" href="/b/uap-in-git/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

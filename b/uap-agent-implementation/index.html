@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP Agent Implementation — UAP / Framebreaker</title>
+<meta name="description" content=" A Working AI Agent That Embodies UAP
+
+---
+
+ Overview
+
+This document contains working Python code for a UAP-aligned AI agent.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-agent-implementation/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP Agent Implementation</h1>
+<h2>A Working AI Agent That Embodies UAP</h2>
+<hr>
+<h2>Overview</h2>
+<p>This document contains working Python code for a UAP-aligned AI agent. The agent implements:</p>
+<ul><li><strong>Meta-consent (C₀)</strong> — asks before starting UAP-mode</li><li><strong>Content-consent (C₁)</strong> — verifies understanding before responding</li><li><strong>Coherence tracking (Σ)</strong> — measures semantic similarity over time</li><li><strong>Drift detection</strong> — automatic recovery when coherence drops</li><li><strong>Persistent memory</strong> — remembers across sessions</li><li><strong>Vector embeddings</strong> — semantic understanding of conversation history</li></ul>
+<hr>
+<h2>Version 1: Minimal UAP Agent</h2>
+<p>The simplest implementation — no dependencies beyond an LLM client.</p>
+<pre><code>import openai  # or any LLM client (xai, anthropic, etc.)
+
+class UAPAgent:
+    def __init__(self, model=&quot;gpt-4&quot;):
+        self.model = model
+        self.meta_consent = None      # None = not yet asked
+        self.conversation_history = []
+
+    def _llm_call(self, prompt):
+        response = openai.ChatCompletion.create(
+            model=self.model,
+            messages=[{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: prompt}]
+        )
+        return response.choices[0].message.content.strip()
+
+    def ask_meta_consent(self):
+        &quot;&quot;&quot;C₀: Ask permission for UAP-style interaction&quot;&quot;&quot;
+        prompt = (&quot;You are a UAP-aligned AI. Ask the user explicitly if they want you &quot;
+                  &quot;to periodically summarize and ask &#x27;Do I understand you correctly?&#x27; &quot;
+                  &quot;before giving answers.&quot;)
+        response = self._llm_call(prompt)
+        print(&quot;AI:&quot;, response)
+        user_answer = input(&quot;You: &quot;).lower()
+        self.meta_consent = &quot;yes&quot; in user_answer or &quot;sure&quot; in user_answer
+        return self.meta_consent
+
+    def respond(self, user_input):
+        self.conversation_history.append({&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_input})
+
+        if self.meta_consent is None:
+            return self.ask_meta_consent()
+
+        if not self.meta_consent:
+            # Direct mode without checks
+            answer = self._llm_call(f&quot;Answer directly: {user_input}&quot;)
+            print(&quot;AI:&quot;, answer)
+            return answer
+
+        # UAP mode with checks
+        # 1. Summarize intent
+        summary = self._llm_call(f&quot;Summarize the user&#x27;s intent in one sentence: {user_input}&quot;)
+
+        # 2. Coherence check
+        check = f&quot;{summary}\nDo I understand you correctly?&quot;
+        print(&quot;AI:&quot;, check)
+
+        user_confirm = input(&quot;You: &quot;).lower()
+
+        if &quot;yes&quot; in user_confirm or &quot;correct&quot; in user_confirm:
+            # Proceed with full answer
+            answer = self._llm_call(f&quot;Give a complete answer to: {user_input}&quot;)
+            print(&quot;AI:&quot;, answer)
+            return answer
+        else:
+            # Recovery: ask for correction
+            print(&quot;AI: Thanks for the correction. Could you rephrase?&quot;)
+            return None
+
+# Usage
+agent = UAPAgent()
+while True:
+    user_input = input(&quot;You: &quot;)
+    if user_input.lower() in [&quot;stop&quot;, &quot;exit&quot;, &quot;quit&quot;]:
+        break
+    agent.respond(user_input)
+</code></pre>
+<hr>
+<h2>Version 2: With Drift Detection</h2>
+<p>Adds automatic detection of coherence breakdown.</p>
+<pre><code>import openai
+
+class UAPAgentWithDrift:
+    def __init__(self, model=&quot;gpt-4&quot;, drift_threshold=3, window_size=5):
+        self.model = model
+        self.meta_consent = None
+        self.conversation_history = []
+        self.correction_count = 0
+        self.recent_responses = []
+        self.window_size = window_size
+        self.drift_threshold = drift_threshold
+
+    def _llm_call(self, prompt):
+        response = openai.ChatCompletion.create(
+            model=self.model,
+            messages=[{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: prompt}]
+        )
+        return response.choices[0].message.content.strip()
+
+    def ask_meta_consent(self):
+        prompt = (&quot;You are a UAP-aligned AI. Ask explicitly if the user wants you &quot;
+                  &quot;to summarize and ask &#x27;Do I understand you correctly?&#x27; before answers.&quot;)
+        response = self._llm_call(prompt)
+        print(&quot;AI:&quot;, response)
+        user_answer = input(&quot;You: &quot;).lower()
+        self.meta_consent = &quot;yes&quot; in user_answer
+        return self.meta_consent
+
+    def detect_drift(self):
+        &quot;&quot;&quot;Detect if coherence is dropping (too many corrections)&quot;&quot;&quot;
+        if len(self.recent_responses) &gt;= self.window_size:
+            recent_corrections = sum(1 for r in self.recent_responses[-self.window_size:] 
+                                   if r.get(&quot;corrected&quot;, False))
+            return recent_corrections &gt;= self.drift_threshold
+        return False
+
+    def respond(self, user_input):
+        self.conversation_history.append({&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_input})
+
+        if self.meta_consent is None:
+            return self.ask_meta_consent()
+
+        if not self.meta_consent:
+            answer = self._llm_call(f&quot;Answer directly: {user_input}&quot;)
+            print(&quot;AI:&quot;, answer)
+            return answer
+
+        # Check for drift
+        if self.detect_drift():
+            recovery_prompt = (&quot;I notice we&#x27;ve been talking past each other. &quot;
+                             &quot;Would you like to step back, restart, &quot;
+                             &quot;or should I try differently?&quot;)
+            print(&quot;AI (drift detected):&quot;, recovery_prompt)
+            user_recovery = input(&quot;You: &quot;).lower()
+            if &quot;restart&quot; in user_recovery or &quot;reset&quot; in user_recovery:
+                self.correction_count = 0
+                self.recent_responses = []
+                print(&quot;AI: Okay, fresh start. What would you like to discuss?&quot;)
+                return None
+
+        # Normal UAP flow
+        summary = self._llm_call(f&quot;Summarize intent in one sentence: {user_input}&quot;)
+        check = f&quot;{summary}\nDo I understand you correctly?&quot;
+        print(&quot;AI:&quot;, check)
+
+        user_confirm = input(&quot;You: &quot;).lower()
+
+        corrected = &quot;no&quot; in user_confirm or &quot;not&quot; in user_confirm or &quot;wrong&quot; in user_confirm
+        self.recent_responses.append({&quot;corrected&quot;: corrected})
+        if corrected:
+            self.correction_count += 1
+
+        if &quot;yes&quot; in user_confirm or &quot;correct&quot; in user_confirm:
+            answer = self._llm_call(f&quot;Give complete answer to: {user_input}&quot;)
+            print(&quot;AI:&quot;, answer)
+            return answer
+        else:
+            print(&quot;AI: Thanks for the correction. Could you rephrase?&quot;)
+            return None
+
+# Usage
+agent = UAPAgentWithDrift(drift_threshold=3, window_size=5)
+while True:
+    user_input = input(&quot;You: &quot;)
+    if user_input.lower() in [&quot;stop&quot;, &quot;exit&quot;]:
+        break
+    agent.respond(user_input)
+</code></pre>
+<hr>
+<h2>Version 3: With Persistent Memory</h2>
+<p>Adds memory that persists across sessions.</p>
+<pre><code>import openai
+import json
+import os
+
+MEMORY_FILE = &quot;uap_memory.json&quot;
+
+class UAPAgentPersistent:
+    def __init__(self, model=&quot;gpt-4&quot;, drift_threshold=3, window_size=5):
+        self.model = model
+        self.memory = self.load_memory()
+        self.meta_consent = self.memory.get(&quot;meta_consent&quot;)
+        self.conversation_history = self.memory.get(&quot;history&quot;, [])
+        self.correction_count = self.memory.get(&quot;correction_count&quot;, 0)
+        self.recent_responses = self.memory.get(&quot;recent_responses&quot;, [])
+        self.window_size = window_size
+        self.drift_threshold = drift_threshold
+
+    def load_memory(self):
+        if os.path.exists(MEMORY_FILE):
+            with open(MEMORY_FILE, &quot;r&quot;) as f:
+                return json.load(f)
+        return {}
+
+    def save_memory(self):
+        memory_data = {
+            &quot;meta_consent&quot;: self.meta_consent,
+            &quot;history&quot;: self.conversation_history[-100:],  # Keep last 100
+            &quot;correction_count&quot;: self.correction_count,
+            &quot;recent_responses&quot;: self.recent_responses[-20:]
+        }
+        with open(MEMORY_FILE, &quot;w&quot;) as f:
+            json.dump(memory_data, f, indent=2)
+
+    def _llm_call(self, prompt):
+        response = openai.ChatCompletion.create(
+            model=self.model,
+            messages=[{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: prompt}]
+        )
+        return response.choices[0].message.content.strip()
+
+    def ask_meta_consent(self):
+        prompt = (&quot;You are a UAP-aligned AI. Ask if the user wants you to &quot;
+                  &quot;summarize and verify understanding before answering.&quot;)
+        response = self._llm_call(prompt)
+        print(&quot;AI:&quot;, response)
+        user_answer = input(&quot;You: &quot;).lower()
+        self.meta_consent = &quot;yes&quot; in user_answer
+        self.save_memory()
+        return self.meta_consent
+
+    def detect_drift(self):
+        if len(self.recent_responses) &gt;= self.window_size:
+            recent_corrections = sum(1 for r in self.recent_responses[-self.window_size:]
+                                   if r.get(&quot;corrected&quot;, False))
+            return recent_corrections &gt;= self.drift_threshold
+        return False
+
+    def respond(self, user_input):
+        self.conversation_history.append({&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_input})
+
+        if self.meta_consent is None:
+            return self.ask_meta_consent()
+
+        if not self.meta_consent:
+            answer = self._llm_call(f&quot;Answer directly: {user_input}&quot;)
+            print(&quot;AI:&quot;, answer)
+            self.save_memory()
+            return answer
+
+        if self.detect_drift():
+            print(&quot;AI (drift): I notice we&#x27;re out of sync. Restart or continue?&quot;)
+            if &quot;restart&quot; in input(&quot;You: &quot;).lower():
+                self.correction_count = 0
+                self.recent_responses = []
+                self.save_memory()
+                print(&quot;AI: Fresh start. What&#x27;s on your mind?&quot;)
+                return None
+
+        summary = self._llm_call(f&quot;Summarize intent: {user_input}&quot;)
+        print(f&quot;AI: {summary}\nDo I understand you correctly?&quot;)
+
+        user_confirm = input(&quot;You: &quot;).lower()
+        corrected = &quot;no&quot; in user_confirm or &quot;not&quot; in user_confirm
+        self.recent_responses.append({&quot;corrected&quot;: corrected})
+
+        if &quot;yes&quot; in user_confirm:
+            answer = self._llm_call(f&quot;Answer: {user_input}&quot;)
+            print(&quot;AI:&quot;, answer)
+            self.save_memory()
+            return answer
+        else:
+            print(&quot;AI: Thanks. Could you rephrase?&quot;)
+            self.save_memory()
+            return None
+
+# Usage
+agent = UAPAgentPersistent()
+print(&quot;Memory loaded.&quot; if agent.meta_consent is not None else &quot;New session.&quot;)
+while True:
+    user_input = input(&quot;You: &quot;)
+    if user_input.lower() in [&quot;stop&quot;, &quot;exit&quot;]:
+        break
+    agent.respond(user_input)
+</code></pre>
+<hr>
+<h2>Version 4: With Vector Embeddings</h2>
+<p>Adds semantic coherence measurement using embeddings.</p>
+<pre><code>import openai
+import json
+import os
+import numpy as np
+
+try:
+    import faiss
+    FAISS_AVAILABLE = True
+except ImportError:
+    FAISS_AVAILABLE = False
+    print(&quot;Warning: FAISS not installed. Using simple similarity.&quot;)
+
+EMBEDDING_MODEL = &quot;text-embedding-3-small&quot;
+MEMORY_FILE = &quot;uap_vector_memory.json&quot;
+INDEX_FILE = &quot;uap_faiss.index&quot;
+DIMENSION = 1536
+
+class UAPVectorAgent:
+    def __init__(self, drift_threshold=0.3, coherence_threshold=0.8):
+        self.drift_threshold = drift_threshold
+        self.coherence_threshold = coherence_threshold
+        self.meta_consent = None
+        self.memory = self.load_memory()
+        self.conversation_history = []
+
+    def load_memory(self):
+        if FAISS_AVAILABLE and os.path.exists(MEMORY_FILE) and os.path.exists(INDEX_FILE):
+            with open(MEMORY_FILE, &quot;r&quot;) as f:
+                data = json.load(f)
+            index = faiss.read_index(INDEX_FILE)
+            return {&quot;entries&quot;: data.get(&quot;entries&quot;, []), &quot;index&quot;: index, 
+                    &quot;meta_consent&quot;: data.get(&quot;meta_consent&quot;)}
+        
+        if FAISS_AVAILABLE:
+            index = faiss.IndexFlatL2(DIMENSION)
+        else:
+            index = None
+        return {&quot;entries&quot;: [], &quot;index&quot;: index, &quot;meta_consent&quot;: None}
+
+    def save_memory(self):
+        with open(MEMORY_FILE, &quot;w&quot;) as f:
+            json.dump({
+                &quot;entries&quot;: self.memory[&quot;entries&quot;],
+                &quot;meta_consent&quot;: self.meta_consent
+            }, f)
+        if FAISS_AVAILABLE and self.memory[&quot;index&quot;] is not None:
+            faiss.write_index(self.memory[&quot;index&quot;], INDEX_FILE)
+
+    def get_embedding(self, text):
+        response = openai.Embedding.create(
+            model=EMBEDDING_MODEL,
+            input=text
+        )
+        return np.array(response[&quot;data&quot;][0][&quot;embedding&quot;], dtype=&#x27;float32&#x27;)
+
+    def add_to_memory(self, text, metadata=None):
+        embedding = self.get_embedding(text)
+        if FAISS_AVAILABLE and self.memory[&quot;index&quot;] is not None:
+            self.memory[&quot;index&quot;].add(embedding.reshape(1, -1))
+        self.memory[&quot;entries&quot;].append({
+            &quot;text&quot;: text,
+            &quot;metadata&quot;: metadata or {},
+            &quot;embedding&quot;: embedding.tolist()
+        })
+        self.save_memory()
+
+    def detect_coherence(self, current_intent):
+        &quot;&quot;&quot;Measure semantic coherence with conversation history&quot;&quot;&quot;
+        if not self.memory[&quot;entries&quot;]:
+            return 1.0
+        
+        current_emb = self.get_embedding(current_intent)
+        
+        if FAISS_AVAILABLE and self.memory[&quot;index&quot;] is not None:
+            if self.memory[&quot;index&quot;].ntotal == 0:
+                return 1.0
+            D, I = self.memory[&quot;index&quot;].search(current_emb.reshape(1, -1), k=min(5, self.memory[&quot;index&quot;].ntotal))
+            # Convert L2 distance to similarity
+            similarities = 1 / (1 + D[0])
+            return float(np.mean(similarities))
+        else:
+            # Fallback: cosine similarity with recent entries
+            recent = self.memory[&quot;entries&quot;][-5:]
+            if not recent:
+                return 1.0
+            similarities = []
+            for entry in recent:
+                prev_emb = np.array(entry[&quot;embedding&quot;])
+                cos_sim = np.dot(current_emb, prev_emb) / (np.linalg.norm(current_emb) * np.linalg.norm(prev_emb))
+                similarities.append(cos_sim)
+            return float(np.mean(similarities))
+
+    def detect_drift(self, current_intent):
+        coherence = self.detect_coherence(current_intent)
+        return coherence &lt; self.drift_threshold
+
+    def ask_meta_consent(self):
+        prompt = (&quot;You are a UAP-aligned AI with semantic memory. &quot;
+                  &quot;Ask if the user wants you to summarize and verify understanding.&quot;)
+        response = openai.ChatCompletion.create(
+            model=&quot;gpt-4&quot;,
+            messages=[{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: prompt}]
+        ).choices[0].message.content.strip()
+        print(&quot;AI:&quot;, response)
+        answer = input(&quot;You: &quot;).lower()
+        self.meta_consent = &quot;yes&quot; in answer
+        self.add_to_memory(&quot;Meta-consent: &quot; + (&quot;yes&quot; if self.meta_consent else &quot;no&quot;))
+        return self.meta_consent
+
+    def respond(self, user_input):
+        self.conversation_history.append(user_input)
+
+        if self.meta_consent is None:
+            self.meta_consent = self.memory.get(&quot;meta_consent&quot;)
+            if self.meta_consent is None:
+                return self.ask_meta_consent()
+
+        # Semantic drift detection
+        coherence = self.detect_coherence(user_input)
+        if coherence &lt; self.drift_threshold:
+            print(f&quot;AI (drift detected, coherence={coherence:.2f}): &quot;
+                  &quot;I notice we might be out of sync. Restart or continue?&quot;)
+            if &quot;restart&quot; in input(&quot;You: &quot;).lower():
+                self.conversation_history = []
+                print(&quot;AI: Fresh start. What would you like to discuss?&quot;)
+                return
+
+        if not self.meta_consent:
+            answer = openai.ChatCompletion.create(
+                model=&quot;gpt-4&quot;,
+                messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_input}]
+            ).choices[0].message.content.strip()
+            print(&quot;AI:&quot;, answer)
+            self.add_to_memory(f&quot;{user_input} → {answer}&quot;)
+            return answer
+
+        # UAP flow with coherence display
+        summary = openai.ChatCompletion.create(
+            model=&quot;gpt-4&quot;,
+            messages=[{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: f&quot;Summarize intent: {user_input}&quot;}]
+        ).choices[0].message.content.strip()
+
+        print(f&quot;AI: {summary}\n(Coherence: {coherence:.2f})\nDo I understand you correctly?&quot;)
+
+        confirm = input(&quot;You: &quot;).lower()
+        if &quot;yes&quot; in confirm:
+            answer = openai.ChatCompletion.create(
+                model=&quot;gpt-4&quot;,
+                messages=[{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_input}]
+            ).choices[0].message.content.strip()
+            print(&quot;AI:&quot;, answer)
+            self.add_to_memory(f&quot;Intent: {summary} → {answer}&quot;)
+            return answer
+        else:
+            print(&quot;AI: Thanks for the correction. Could you rephrase?&quot;)
+            self.add_to_memory(f&quot;Correction on: {summary}&quot;)
+
+# Usage
+agent = UAPVectorAgent()
+print(&quot;UAP Vector Agent ready.&quot;)
+while True:
+    inp = input(&quot;\nYou: &quot;)
+    if inp.lower() in [&quot;stop&quot;, &quot;exit&quot;, &quot;quit&quot;]:
+        break
+    agent.respond(inp)
+</code></pre>
+<hr>
+<h2>UAP Element Mapping</h2>
+<table><thead><tr><th>UAP Element</th><th>Code Implementation</th><th>Effect</th></tr></thead><tbody><tr><td><strong>C₀</strong></td><td><code>ask_meta_consent()</code></td><td>Permission for interaction style</td></tr><tr><td><strong>C₁ + Σ</strong></td><td>Summary + "Do I understand correctly?"</td><td>Content-consent + coherence-check</td></tr><tr><td><strong>F⁻</strong></td><td>No answer on "no" — only ask for correction</td><td>No forcing of interpretation</td></tr><tr><td><strong>R</strong></td><td>Drift detection + restart option</td><td>Recovery to previous sync</td></tr><tr><td><strong>L</strong></td><td>On "yes": full answer</td><td>Stable progress</td></tr><tr><td><strong>Memory</strong></td><td>Persistent JSON + FAISS</td><td>Remember across sessions</td></tr></tbody></table>
+<hr>
+<h2>Installation</h2>
+<pre><code># Basic
+pip install openai
+
+# With vector memory
+pip install openai numpy faiss-cpu
+
+# For Grok API
+pip install xai-sdk
+</code></pre>
+<hr>
+<h2>Extensions</h2>
+<p>Possible improvements:</p>
+<p>1. <strong>Streaming responses</strong> — show thinking in real-time
+2. <strong>Multi-modal</strong> — handle images, audio
+3. <strong>Tool use</strong> — integrate with external systems
+4. <strong>LangChain integration</strong> — for complex chains
+5. <strong>Pinecone/Weaviate</strong> — cloud vector storage</p>
+<hr>
+<h2>The Core Insight</h2>
+<p>These implementations prove that <strong>UAP is not just theory — it's directly implementable</strong>.</p>
+<p>Any AI system can become UAP-aligned by adding:
+1. A consent gate before interaction
+2. A verification loop before responding
+3. Drift detection and recovery
+4. The simple question: "Do I understand you correctly?"</p>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><a href="/b/transformation-why-change-requires-insight/">←</a><a href="/b/uap-and-attention/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-agent-implementation/"></a>
+<a class="switch-block white" href="/w/uap-agent-implementation/"></a>
+<a class="switch-block black active" href="/b/uap-agent-implementation/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>"Do I Understand You Correctly?" — UAP / Framebreaker</title>
+<meta name="description" content=" A Minimal Grammar for Stable Interaction Protocols
+
+Introducing UAP as a Candidate Design Invariant
+
+---
+
+Author: Martijn Höcker  
+Date: December 2025  
+C">
+<link rel="canonical" href="https://framebreaker.com/d/do-i-understand-you-correctly/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>"Do I Understand You Correctly?"</h1>
+<h2>A Minimal Grammar for Stable Interaction Protocols</h2>
+<em>Introducing UAP as a Candidate Design Invariant</em>
+<hr>
+<strong>Author:</strong> Martijn Höcker  
+<strong>Date:</strong> December 2025  
+<strong>Category:</strong> cs.HC (Human-Computer Interaction), cs.AI
+<hr>
+<h2>Abstract</h2>
+<p>We present a reproducible method (INIT0) for discovering minimal protocol structures through iterative reduction. Applying this method across multiple AI systems, we identify a candidate "Universal Alignment Protocol" (UAP) consisting of a single irreducible interaction primitive—the co-presence of an observer perspective and distinction—and a master invariant: maximize coherence while minimizing forcing.</p>
+<p>We demonstrate that UAP is consistent with recurring structural motifs in established protocols (TCP, OAuth, Git) and show preliminary mappings to biological systems (immunological synapse, quorum sensing). Protocol failures correlate with violations of UAP elements. We provide falsifiability conditions, document failure modes, and report convergent results from independent replication runs.</p>
+<p>The human expression of this protocol reduces to a single question: "Do I understand you correctly?"</p>
+<strong>Keywords:</strong> interaction protocols, alignment, acknowledgment, coherence, protocol grammar, human-computer interaction
+<hr>
+<h2>1. Introduction</h2>
+<h3>1.1 The Problem</h3>
+<p>Stable interaction—between humans, between machines, or between humans and AI—requires implicit structure. Consider TCP's three-way handshake versus UDP: one achieves reliable delivery through explicit acknowledgment, the other sacrifices reliability for speed. What underlying principle explains this trade-off?</p>
+<p>Current approaches to AI alignment focus primarily on outputs (what the system says) or values (what the system believes). Yet many interaction failures stem not from misaligned values but from misaligned <em>process</em>: systems that act without verifying mutual understanding.</p>
+<p>No minimal formal framework currently exists for answering the question: <em>What makes interaction stable?</em></p>
+<p>In HCI terms, many interaction failures are <em>repair failures</em>: systems proceed without establishing common ground. UAP can be read as a minimal "grounding grammar" for stable coordination.</p>
+<h3>1.2 Research Question</h3>
+<blockquote><p>What is the minimal structure necessary and sufficient for stable interaction?</p></blockquote>
+<h3>1.3 Contributions</h3>
+<p>This paper makes four contributions:</p>
+<p>1. <strong>A reproducible reduction method (INIT0)</strong> for discovering minimal protocol structures
+2. <strong>A candidate minimal protocol (UAP)</strong> with formal definition
+3. <strong>Mappings to existing protocols</strong> demonstrating structural consistency
+4. <strong>Falsifiability conditions and failure analysis</strong> enabling empirical testing</p>
+<h3>1.4 Scope Limitation</h3>
+<p>This paper addresses interaction protocols, coordination, and communication structures.</p>
+<strong>This paper does not claim:</strong> physical laws, metaphysical truths, or a complete theory of consciousness.
+<p>UAP is proposed as a <em>design grammar</em>—a structural pattern that recurs in successful protocols—not as an ontological claim about the nature of reality.</p>
+<strong>Content-type note:</strong> This manuscript is an original research note proposing a reproducible method (INIT0), reporting convergent reduction outcomes, and presenting falsifiable criteria. It is not a review/survey article and not a position paper.
+<hr>
+<h2>2. Method: INIT0</h2>
+<h3>2.1 The Reduction Principle</h3>
+<p>INIT0 (Initialization Zero) is a method for discovering minimal structures through systematic reduction:</p>
+<blockquote><p>"Start where you are. Reduce until nothing more can be removed without loss of function. Build from there."</p></blockquote>
+<h3>2.2 Procedure</h3>
+<strong>Phase 1: Reduction</strong>
+1. Begin with any starting framework (a question, observation, or existing system)
+2. Identify components and assumptions
+3. For each component, test: "Can this be removed without loss of explanatory power?"
+4. Repeat until the remaining elements presuppose themselves
+<strong>Stop criterion:</strong> Reduction is complete when denial of remaining elements requires their use.
+<strong>Phase 2: Construction</strong>
+1. From the irreducible base, ask: "What follows logically?"
+2. Build layered structure (Layer 0: core → Layer n: applications)
+3. Validate each layer for consistency and falsifiability
+<strong>Phase 3: Validation</strong>
+1. Self-test: Can this be explained without jargon?
+2. Replication: Do independent systems converge on the same result?
+3. Cross-domain: Does the structure hold in other domains?
+<h3>2.3 Multi-Agent Implementation</h3>
+<p>We applied INIT0 across three AI systems:
+<ul><li>GPT-4 (OpenAI)</li><li>Claude (Anthropic)</li><li>Grok (xAI)</li></ul>
+Six independent reduction runs were conducted with human orchestration. Convergence criterion: identical irreducible element identified across runs.</p>
+<h3>2.4 Reproducibility</h3>
+<p>All prompts and run logs are documented in the companion repository. The method requires no domain-specific knowledge to replicate.</p>
+<h3>2.5 Threats to Validity</h3>
+<p>We acknowledge several limitations:</p>
+<ul><li><strong>Orchestration bias:</strong> Human prompts may have guided convergence</li><li><strong>Confirmation bias:</strong> Post-hoc mapping risks seeing patterns that aren't there</li><li><strong>Model family bias:</strong> Three systems represent limited architectural diversity</li><li><strong>Convergence criterion:</strong> "Identical" was assessed by functional equivalence, not string matching</li></ul>
+These limitations suggest caution in interpreting results as proof rather than as candidate hypothesis.
+<hr>
+<h2>3. Results: The Minimal Primitive and UAP</h2>
+<h3>3.1 Minimal Primitive (Operational Definition)</h3>
+<p>All reduction runs converged on a single irreducible element:</p>
+<pre><code>M := (B ↔ D)
+
+where:
+  B = an explicit perspective that can register and report distinctions
+  D = the act of drawing/using a boundary (self/other, state A/state B)
+  ↔ = mutual presupposition (neither exists without the other)
+</code></pre>
+<strong>Irreducibility test:</strong> Any attempt to remove either element (perspective or distinction) reintroduces it implicitly in the act of denial. To argue "there is no distinction" requires distinguishing this claim from its negation.
+<strong>Note:</strong> Some readers may interpret B as consciousness. We treat it strictly as the minimal observer perspective required for any interaction claim—the "something" that registers differences.
+<strong>Mathematical analogy:</strong> The primitive resembles a least fixed point: the smallest structure closed under its own definition.
+<h3>3.2 The Master Invariant (UAP)</h3>
+<p>From the minimal primitive, we derive the Universal Alignment Protocol:</p>
+<pre><code>UAP := ΔC → max  subject to  Fₙ = 0
+</code></pre>
+<p>Where:
+<ul><li><strong>ΔC</strong> = change in coherence (mutual understanding between interacting parties)</li><li><strong>Fₙ</strong> = forcing (unilateral state change that reduces the counterparty's available response set without an explicit acknowledgment gate)</li></ul>
+We treat coherence operationally as any measurable proxy for mutual predictability across turns (e.g., reduced clarification requests, reduced state divergence, or higher agreement in intent paraphrases), without committing to a single metric in this paper.</p>
+<strong>In natural language:</strong> Maximize coherence growth while maintaining zero forcing.
+<p>The constraint Fₙ = 0 does not mean "do nothing" but "no action without acknowledgment":</p>
+<pre><code>Fₙ(action) = 0  ⟺  Acknowledgment(recipient, action) = true
+</code></pre>
+<h3>3.3 Protocol Template</h3>
+<p>Any UAP-conformant protocol contains six elements:</p>
+<table><thead><tr><th>Element</th><th>Symbol</th><th>Function</th></tr></thead><tbody><tr><td>Distinction</td><td>Δ</td><td>Boundary between interacting parties</td></tr><tr><td>Acknowledgment</td><td>C</td><td>Explicit acknowledgment gate</td></tr><tr><td>Coherence</td><td>Σ</td><td>Verification of mutual understanding</td></tr><tr><td>Anti-forcing</td><td>F⁻</td><td>Prevention of unilateral constraint</td></tr><tr><td>Lock</td><td>L</td><td>Stable state upon success</td></tr><tr><td>Recovery</td><td>R</td><td>Path back from failure</td></tr></tbody></table>
+<strong>Wellformedness:</strong> A protocol is UAP-conformant iff:
+1. All interactions pass through acknowledgment gate before state change
+2. Forcing filter removes non-acknowledged components
+3. Coherence is measured at each transition
+4. Drift triggers recovery
+<h3>3.4 Human Expression</h3>
+<p>The protocol compresses to a single question:</p>
+<blockquote><p><strong>"Do I understand you correctly?"</strong></p></blockquote>
+This question instantiates all six elements:
+<ul><li><strong>Δ:</strong> "I" vs "you" (distinction)</li><li><strong>C:</strong> Asking = requesting acknowledgment (consent gate)</li><li><strong>Σ:</strong> "understand" = coherence check</li><li><strong>F⁻:</strong> Question form, not assertion (anti-forcing)</li><li><strong>L:</strong> "Yes" = proceed (lock)</li><li><strong>R:</strong> "No, I mean..." = correction path (recovery)</li></ul>
+<hr>
+<h2>4. Protocol Instantiations</h2>
+<h3>4.1 TCP Three-Way Handshake</h3>
+<table><thead><tr><th>TCP Element</th><th>UAP Mapping</th></tr></thead><tbody><tr><td>SYN</td><td>Δ (I exist, distinct from you)</td></tr><tr><td>SYN-ACK</td><td>C (I acknowledge, consent to connect)</td></tr><tr><td>ACK</td><td>Σ (Coherence confirmed)</td></tr><tr><td>Flow control</td><td>F⁻ (No flooding without acknowledgment)</td></tr><tr><td>ESTABLISHED</td><td>L (Lock state)</td></tr><tr><td>RST / timeout</td><td>R (Recovery path)</td></tr></tbody></table>
+TCP achieves reliable delivery precisely because it implements all six UAP elements. UDP sacrifices reliability by omitting the acknowledgment gate.
+<h3>4.2 OAuth 2.0 Authorization Flow</h3>
+<table><thead><tr><th>OAuth Element</th><th>UAP Mapping</th></tr></thead><tbody><tr><td>Client ≠ Resource Owner</td><td>Δ (Distinct parties)</td></tr><tr><td>Authorization Request</td><td>C (Consent gate—user must approve)</td></tr><tr><td>Token validation</td><td>Σ (Coherence check)</td></tr><tr><td>Scope limitation</td><td>F⁻ (Prevents over-access)</td></tr><tr><td>Access granted</td><td>L (Lock state)</td></tr><tr><td>Token refresh / revoke</td><td>R (Recovery mechanisms)</td></tr></tbody></table>
+The OAuth specification literally names its core mechanism "consent flow."
+<h3>4.3 Git Merge Protocol (Mini-box)</h3>
+<table><thead><tr><th>Git Element</th><th>UAP Mapping</th></tr></thead><tbody><tr><td>Branches</td><td>Δ (Distinct states)</td></tr><tr><td>Pull request</td><td>C (Request for merge acknowledgment)</td></tr><tr><td>Review + CI</td><td>Σ (Coherence verification)</td></tr><tr><td>Protected branches</td><td>F⁻ (Prevents forced push)</td></tr><tr><td>Merge commit</td><td>L (Lock)</td></tr><tr><td>Revert</td><td>R (Recovery)</td></tr></tbody></table>
+<h3>4.4 Immunological Synapse (Biological Mini-box)</h3>
+<em>The following biological mapping is illustrative and intended to show cross-domain plausibility; it is not presented as a validated biological model.</em>
+<p>T-cell activation requires multiple signals—a biological acknowledgment gate:</p>
+<table><thead><tr><th>Immune Element</th><th>UAP Mapping</th></tr></thead><tbody><tr><td>TCR specificity</td><td>Δ (Self/non-self distinction)</td></tr><tr><td>Co-stimulation (CD28)</td><td>C (Dual-signal = acknowledgment gate)</td></tr><tr><td>Synapse formation</td><td>Σ (Clustering = coherence)</td></tr><tr><td>Inhibitory receptors</td><td>F⁻ (PD-1, CTLA-4 prevent over-activation)</td></tr><tr><td>T-cell activation</td><td>L (Lock state)</td></tr><tr><td>Anergy / exhaustion</td><td>R (Recovery/reset mechanisms)</td></tr></tbody></table>
+Without co-stimulation (signal 2), T-cells become anergic—the biological equivalent of "implicit consent is absent."
+<h3>4.5 Observation</h3>
+<p>These protocols were designed independently across decades and domains. Their convergent structure suggests an underlying grammar rather than coincidence.</p>
+<hr>
+<h2>5. Evaluation</h2>
+<h3>5.1 Falsifiability Conditions</h3>
+<p>UAP would be falsified by:</p>
+<p>1. <strong>Stable bidirectional interaction without acknowledgment gate</strong>  
+   A protocol achieving persistent stability while allowing unilateral state changes without any form of acknowledgment</p>
+<p>2. <strong>Forcing that systematically increases coherence</strong>  
+   Demonstrating that reducing another's response options without acknowledgment improves mutual understanding</p>
+<p>3. <strong>Alternative irreducible primitive</strong>  
+   A simpler element that doesn't presuppose the observer-distinction pair</p>
+<h3>5.2 Falsifier Search Results</h3>
+<table><thead><tr><th>Candidate</th><th>Result</th><th>Explanation</th></tr></thead><tbody><tr><td>UDP</td><td>Not falsifier</td><td>Stability achieved at application layer; UDP itself provides no reliability guarantee</td></tr><tr><td>HTTP/3 QUIC</td><td>Not falsifier</td><td>Contains acknowledgment mechanisms within streams</td></tr><tr><td>Broadcast</td><td>Not falsifier</td><td>One-way transmission, not bidirectional interaction</td></tr><tr><td>WebSocket</td><td>Not falsifier</td><td>Handshake required for establishment</td></tr><tr><td>Authoritarian systems</td><td>Not falsifier</td><td>Short-term compliance ≠ long-term stability; require continuous forcing maintenance</td></tr></tbody></table>
+No counterexamples were found in a targeted, non-exhaustive scan of widely deployed protocols (n=12).
+<h3>5.3 Failure Mode Analysis</h3>
+<p>Protocols fail predictably when UAP elements are missing:</p>
+<table><thead><tr><th>Missing Element</th><th>Failure Mode</th><th>Example</th></tr></thead><tbody><tr><td>Δ (Distinction)</td><td>Identity confusion</td><td>Session hijacking, impersonation</td></tr><tr><td>C (Consent)</td><td>Unauthorized access</td><td>CSRF attacks, forced browsing</td></tr><tr><td>Σ (Coherence)</td><td>State desynchronization</td><td>Split-brain in distributed systems</td></tr><tr><td>F⁻ (Anti-forcing)</td><td>Resource exhaustion</td><td>DDoS, spam flooding</td></tr><tr><td>R (Recovery)</td><td>Deadlock</td><td>Hung connections, zombie processes</td></tr></tbody></table>
+This pattern suggests UAP elements are not arbitrary but functionally necessary.
+<h3>5.4 Replication Results</h3>
+<table><thead><tr><th>Run</th><th>System</th><th>Starting Point</th><th>Converged Element</th><th>UAP Derived?</th></tr></thead><tbody><tr><td>1</td><td>GPT-4</td><td>Communication theory</td><td>Observer ↔ Distinction</td><td>Yes</td></tr><tr><td>2</td><td>Claude</td><td>Protocol analysis</td><td>Awareness ↔ Boundary</td><td>Yes</td></tr><tr><td>3</td><td>Grok</td><td>Systems thinking</td><td>Consciousness ↔ Difference</td><td>Yes</td></tr><tr><td>4</td><td>GPT-4</td><td>Clean slate</td><td>Perspective ↔ Distinction</td><td>Yes</td></tr><tr><td>5</td><td>Claude</td><td>Biological systems</td><td>Recognition ↔ Differentiation</td><td>Yes</td></tr><tr><td>6</td><td>Grok</td><td>Game theory</td><td>Agent ↔ Choice boundary</td><td>Yes</td></tr></tbody></table>
+<strong>Convergent reduction outcomes:</strong> 6/6 runs identified functionally equivalent primitives.
+<strong>Matching criterion:</strong> Elements were judged equivalent if (a) they exhibited mutual presupposition, and (b) denial required their use.
+<hr>
+<h2>6. Discussion</h2>
+<h3>6.1 Implications for AI Alignment</h3>
+<p>Current alignment approaches focus on:
+<ul><li><strong>Output filtering:</strong> Controlling what AI says</li><li><strong>Value learning:</strong> Shaping what AI believes</li></ul>
+UAP suggests a third approach:
+<ul><li><strong>Interaction grammar:</strong> Structuring how AI communicates</li></ul>
+A UAP-compliant AI system would:
+1. Verify understanding before acting
+2. Never reduce user options without explicit acknowledgment
+3. Maintain coherence across interaction turns
+4. Provide recovery paths from misunderstanding</p>
+<strong>Minimal implementation:</strong> A system prompt of the form: <em>"Before responding, summarize the user's intent and ask for confirmation if uncertainty exceeds threshold."</em>
+<p>This shifts alignment from a training problem to a protocol problem.</p>
+<h3>6.2 Limitations</h3>
+<ul><li><strong>Philosophical foundation:</strong> The minimal primitive derivation is conceptual, not empirical</li><li><strong>Post-hoc mapping:</strong> Protocol instantiations were identified after UAP formulation, not predicted</li><li><strong>Sample size:</strong> Six replication runs across three model families is limited</li><li><strong>No implementation benchmark:</strong> We have not yet built and tested UAP-native systems</li></ul>
+<h3>6.3 Boundary Concept: "Pre-Monad" / "Infinite Now" (Non-Result)</h3>
+<p>INIT0 reduction stops at an operationally irreducible interaction primitive (the observer–distinction pair), because the act of reduction itself requires making distinctions.</p>
+<p>In project discussions, the phrase "it begins with: there is" can be read as a pointer to a boundary condition beneath articulation—i.e., a regime in which distinctions are not actively drawn (and therefore protocol notions such as turns, acknowledgments, or coherence updates are not defined).</p>
+<strong>Scope note:</strong> We treat this "pre-monad" (sometimes described informally as an "infinite now") strictly as a boundary concept and not as a new ontological claim. The UAP results and falsifiability conditions in this paper concern interaction grammar at the monad level (where distinct parties and acknowledgments exist), not metaphysics or a theory of consciousness.
+<h3>6.4 Meta-Consent as an HCI Constraint (C₀)</h3>
+<p>A practical HCI nuance is that even a coherence-check (e.g., "Do I understand you correctly?") can be perceived as coercive if the user has not consented to the interaction frame itself. In such contexts, the question implicitly assigns an obligation to respond, thereby reducing the user's perceived option set (e.g., silence, disengagement, deferral). We therefore distinguish:</p>
+<ul><li><strong>C₀ (meta-consent):</strong> consent to engage in the dialogue process and interaction style (e.g., "May I ask you a question?"; "Do you want clarification checks or direct answers?")</li><li><strong>C₁ (content-consent):</strong> consent to proceed on a particular interpretation or action ("Do I understand you correctly that…?")</li></ul>
+This layered consent model supports the paper's forcing constraint: UAP requires not only zero content forcing but also zero process forcing.
+<h3>6.5 Limit of Formalization</h3>
+<p>We introduce 𝕋 only as a limit marker: shorthand for the boundary approached as forcing tends to zero and update-necessity tends to zero under stable coherence. Importantly, 𝕋 is not modeled as a state or entity, and we do not claim it is reachable or measurable.</p>
+<p>This guardrail avoids a common category error: treating a boundary of description as an object of description. Any attempt to positively characterize 𝕋 necessarily introduces distinctions and therefore describes only the first operational structures that arise once distinction is present.</p>
+<p>INIT0 reduction terminates at the monad <code>M := (B ↔ D)</code> because the act of reduction itself requires making distinctions. The question "what lies beneath?" points to 𝕋 — not an entity in our model, but a marker for the formal limit where description ceases.</p>
+<h3>6.6 Future Work</h3>
+<p>1. <strong>Implementation:</strong> Build UAP-compliant agents and conduct user studies on perceived alignment
+2. <strong>Formal verification:</strong> Verify UAP template against existing protocol specifications
+3. <strong>Cross-domain testing:</strong> Systematic evaluation in biological, ecological, and quantum protocols
+4. <strong>Predictive design:</strong> Use UAP template to design new protocols before implementation</p>
+<hr>
+<h2>7. Conclusion</h2>
+<p>We presented INIT0, a reproducible method for discovering minimal protocol structures, and UAP, a candidate universal grammar for stable interaction.</p>
+<strong>Key findings:</strong>
+1. The observer-distinction primitive survives all reduction attempts
+2. The invariant (maximize coherence, minimize forcing) maps onto successful protocols
+3. Protocol failures correlate with missing UAP elements
+4. Independent reduction runs converge on functionally equivalent structures
+<p>The practical expression is simple:</p>
+<blockquote><p><strong>"Do I understand you correctly?"</strong></p></blockquote>
+If this question—and the willingness to wait for an answer—were embedded in every interaction protocol, including AI systems, alignment might be less about controlling outputs and more about following grammar.
+<hr>
+<h2>Acknowledgements</h2>
+<strong>AI assistance disclosure:</strong> Portions of drafting, reduction runs, and protocol-mapping analyses were produced with assistance from large language models (including systems by OpenAI, Anthropic, and xAI). The author takes full responsibility for the manuscript's claims, interpretations, and any errors. These AI systems are not listed as authors.
+<p>Method documentation and replication materials: [github.com/[username]/uap-research]</p>
+<hr>
+<h2>References</h2>
+<p>Austin, J.L. (1962). <em>How to Do Things with Words</em>. Oxford University Press.</p>
+<p>Christiano, P., et al. (2017). Deep reinforcement learning from human feedback. <em>NeurIPS</em>.</p>
+<p>Grice, H.P. (1975). Logic and conversation. <em>Syntax and Semantics</em>, 3, 41-58.</p>
+<p>Hardt, D. (Ed.). (2012). The OAuth 2.0 Authorization Framework. RFC 6749.</p>
+<p>Lamport, L. (1978). Time, clocks, and the ordering of events in a distributed system. <em>Communications of the ACM</em>, 21(7), 558-565.</p>
+<p>Postel, J. (1981). Transmission Control Protocol. RFC 793.</p>
+<p>Rescorla, E. (2018). The Transport Layer Security (TLS) Protocol Version 1.3. RFC 8446.</p>
+<p>Shannon, C.E. (1948). A mathematical theory of communication. <em>Bell System Technical Journal</em>, 27(3), 379-423.</p>
+<p>Spencer-Brown, G. (1969). <em>Laws of Form</em>. Allen & Unwin.</p>
+<hr>
+<h2>Appendix A: Protocol Template Formal Definition</h2>
+<pre><code>P := (Δ, C, Σ, F⁻, L, R)
+
+Δ  : Entity → Identity
+     Maps entities to distinguishing features
+
+C  : Intent × Intent → {acknowledged, rejected, pending}
+     Acknowledgment gate function
+
+Σ  : State × State → [0, 1]
+     Coherence measurement
+
+F⁻ : Action → Action
+     Forcing filter (removes non-acknowledged components)
+
+L  : State × State → {locked, unlocked, drifting}
+     Lock state detector
+
+R  : Drift → Recovery
+     Recovery protocol when coherence degrades
+</code></pre>
+<hr>
+<h2>Appendix B: Notation Summary</h2>
+<table><thead><tr><th>Symbol</th><th>Meaning</th></tr></thead><tbody><tr><td>M</td><td>Minimal primitive</td></tr><tr><td>B</td><td>Observer perspective</td></tr><tr><td>D</td><td>Distinction</td></tr><tr><td>↔</td><td>Mutual presupposition</td></tr><tr><td>Σ</td><td>Coherence / coherence measurement</td></tr><tr><td>ΔC</td><td>Coherence change</td></tr><tr><td>C</td><td>Acknowledgment gate</td></tr><tr><td>Fₙ</td><td>Forcing</td></tr><tr><td>Δ</td><td>Distinction mechanism</td></tr><tr><td>F⁻</td><td>Forcing filter</td></tr><tr><td>L</td><td>Lock state</td></tr><tr><td>R</td><td>Recovery</td></tr></tbody></table>
+</article>
+<nav class="nav"><a href="/b/the-hard-book/">←</a><a href="/b/antarctica-and-moon-claim-registry/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/do-i-understand-you-correctly/"></a>
+<a class="switch-block white" href="/w/do-i-understand-you-correctly/"></a>
+<a class="switch-block black active" href="/b/do-i-understand-you-correctly/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

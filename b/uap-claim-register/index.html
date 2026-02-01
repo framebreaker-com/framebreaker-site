@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP Claim Register — UAP / Framebreaker</title>
+<meta name="description" content=" All Claims, Risk-Assessed and Review-Ready
+
+Version: 1.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-claim-register/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP Claim Register</h1>
+<h2>All Claims, Risk-Assessed and Review-Ready</h2>
+<strong>Version:</strong> 1.0  
+<strong>Date:</strong> December 2025  
+<strong>Purpose:</strong> Complete inventory for peer review, legal safety, and intellectual honesty
+<hr>
+<h2>How to Read This Document</h2>
+<h3>Claim Types</h3>
+<table><thead><tr><th>Type</th><th>Meaning</th><th>Proof Burden</th></tr></thead><tbody><tr><td><strong>F</strong></td><td>Formal/Definitional</td><td>Follows from definitions</td></tr><tr><td><strong>I</strong></td><td>Inference/Operational</td><td>Testable with examples/measurements</td></tr><tr><td><strong>H</strong></td><td>Hypothesis</td><td>Requires literature or explicit disclaimer</td></tr></tbody></table>
+<h3>Risk Levels</h3>
+<table><thead><tr><th>Risk</th><th>Meaning</th><th>Action</th></tr></thead><tbody><tr><td>🟢 Low</td><td>Safe for main spec</td><td>Include in normative sections</td></tr><tr><td>🟡 Medium</td><td>Needs careful wording</td><td>Include with hedging language</td></tr><tr><td>🔴 High</td><td>Reviewer bait</td><td>Move to appendix or reframe</td></tr></tbody></table>
+<hr>
+<h2>Level A: Within-Model Claims (Review-Proof Core)</h2>
+<p>These claims follow from definitions and protocol logic.</p>
+<h3>UAP-C1 — Zero-forcing is structurally enforceable</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>F</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>The protocol defines forcing as unilateral option-reduction without consent, and contains gates (C₀/C₁ + Σ + R) that structurally block it.</td></tr><tr><td><strong>Proof</strong></td><td>Definitions + procedure</td></tr><tr><td><strong>Release wording</strong></td><td>"UAP is defined to exclude unilateral option-reduction without explicit consent."</td></tr></tbody></table>
+<h3>UAP-C2 — Recovery is first-class</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>F/I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>When coherence drops, UAP routes to recovery: return to last lock, re-paraphrase, re-consent.</td></tr><tr><td><strong>Proof</strong></td><td>Decision rules + example runs</td></tr><tr><td><strong>Release wording</strong></td><td>"UAP specifies a recovery path under detected mismatch."</td></tr></tbody></table>
+<h3>UAP-C3 — Limit marker discipline (𝕋)</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>F</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>𝕋 is a limit-marker (stop sign), not a state/layer/entity. Any φ(𝕋) describes only the first distinction induced by language.</td></tr><tr><td><strong>Proof</strong></td><td>Logical hygiene</td></tr><tr><td><strong>Release wording</strong></td><td>"𝕋 denotes the boundary of formalization, not a model object."</td></tr></tbody></table>
+<hr>
+<h2>Level B: Software Engineering / Systems</h2>
+<h3>SE-1 — Requirement ↔ Implementation Coherence</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>Explicit paraphrase + confirmation before implementation reduces requirement drift and rework.</td></tr><tr><td><strong>Proof</strong></td><td>Case studies, metrics</td></tr><tr><td><strong>Release wording</strong></td><td>"We hypothesize measurable reductions in requirement drift under explicit confirmation gates."</td></tr></tbody></table>
+<h3>SE-2 — Protocol Hygiene</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>Lock/recovery mirrors ACK/handshake/rollback mechanisms at the interaction layer.</td></tr><tr><td><strong>Proof</strong></td><td>Mapping</td></tr><tr><td><strong>Release wording</strong></td><td>"UAP's lock/recovery mirrors established reliability patterns at the interaction layer."</td></tr></tbody></table>
+<h3>SE-3 — Self-Application (Idempotence)</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>F</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>Using UAP to discuss UAP yields no extra ontology.</td></tr><tr><td><strong>Proof</strong></td><td>Demonstration</td></tr><tr><td><strong>Release wording</strong></td><td>"UAP is closed under its own application as a procedure."</td></tr></tbody></table>
+<hr>
+<h2>Level B: Security / Privacy / IAM</h2>
+<h3>SEC-1 — Consent as Least Privilege</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>UAP formalizes least privilege as anti-forcing: access only after explicit intent confirmation.</td></tr><tr><td><strong>Proof</strong></td><td>Design pattern</td></tr><tr><td><strong>Release wording</strong></td><td>"UAP can be implemented as explicit confirmation gates on privilege elevation."</td></tr></tbody></table>
+<h3>SEC-2 — Drift as Anomaly Detection</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>Repeated corrections/mismatches signal drift; recovery is "re-auth."</td></tr><tr><td><strong>Proof</strong></td><td>Operational definitions</td></tr><tr><td><strong>Release wording</strong></td><td>"We treat repeated mismatch as a drift signal and route to re-confirmation."</td></tr></tbody></table>
+<h3>SEC-3 — Social Engineering Resistance</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟡 Medium</td></tr><tr><td><strong>Claim</strong></td><td>UAP blocks common social engineering patterns (urgency, implicit pressure).</td></tr><tr><td><strong>Proof</strong></td><td>Experiments needed</td></tr><tr><td><strong>Release wording</strong></td><td>"We hypothesize UAP reduces susceptibility to coercive prompt patterns."</td></tr></tbody></table>
+<hr>
+<h2>Level B: Psychology / Therapy</h2>
+<h3>PSY-1 — Generalized Clean Language</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>UAP formalizes what "clean" questions do: no interpretation push, verification instead.</td></tr><tr><td><strong>Proof</strong></td><td>Comparison</td></tr><tr><td><strong>Release wording</strong></td><td>"UAP abstracts common non-coercive interviewing moves into a minimal protocol."</td></tr></tbody></table>
+<h3>PSY-2 — Insight as Snapshot Window</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I/F</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>Insight events = coherence dip followed by new lock, without external forcing.</td></tr><tr><td><strong>Proof</strong></td><td>Operationalization</td></tr><tr><td><strong>Release wording</strong></td><td>"We model insight operationally as a forcing-free reconfiguration into a new stable lock."</td></tr></tbody></table>
+<h3>PSY-3 — Forcing Produces Compliance, Not Change</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟡 Medium</td></tr><tr><td><strong>Claim</strong></td><td>Coerced change is unstable; lasting change requires internal reconfiguration.</td></tr><tr><td><strong>Proof</strong></td><td>Literature or careful language</td></tr><tr><td><strong>Release wording</strong></td><td>"Coercive pressure often yields surface-level compliance; we expect lower stability of outcomes."</td></tr></tbody></table>
+<hr>
+<h2>Level B/C: Neuroscience / Cognition</h2>
+<h3>NEURO-1 — Noise as Friction</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>H → can become I</td></tr><tr><td><strong>Risk</strong></td><td>🟡 Medium</td></tr><tr><td><strong>Claim</strong></td><td>Cognitive "noise" can be modeled as forcing/friction in coherence-seeking.</td></tr><tr><td><strong>Proof</strong></td><td>Definitions + experiments</td></tr><tr><td><strong>Release wording</strong></td><td>"We propose a mapping where certain noise-like effects behave as coherence-friction under coercive constraints."</td></tr></tbody></table>
+<h3>NEURO-2 — "Zero Noise" as Optimum (STRONG)</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>H</td></tr><tr><td><strong>Risk</strong></td><td>🔴 High</td></tr><tr><td><strong>Claim</strong></td><td>The brain is "built" to run UAP-like zero-forcing conditions; noise is bug.</td></tr><tr><td><strong>Proof</strong></td><td>Enormous burden</td></tr><tr><td><strong>Release wording (SAFE)</strong></td><td>"We do not claim the brain is designed for zero noise; we hypothesize that lower coercive pressure increases the likelihood of stable cognitive reconfiguration."</td></tr></tbody></table>
+<h3>NEURO-3 — Insight as Representation Shift</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I/H</td></tr><tr><td><strong>Risk</strong></td><td>🟡 Medium</td></tr><tr><td><strong>Claim</strong></td><td>Insight corresponds to measurable representation shifts (human: cognitive restructuring; AI: grokking).</td></tr><tr><td><strong>Proof</strong></td><td>Literature</td></tr><tr><td><strong>Release wording</strong></td><td>"Insight can be treated as an internal representation shift evidenced by post-transition stability."</td></tr></tbody></table>
+<hr>
+<h2>Level B: AI Alignment / AGI</h2>
+<h3>AI-1 — Deception Reduction</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟡 Medium</td></tr><tr><td><strong>Claim</strong></td><td>Removing coercive incentives reduces strategic misrepresentation.</td></tr><tr><td><strong>Proof</strong></td><td>Threat model + experiments</td></tr><tr><td><strong>Release wording</strong></td><td>"We hypothesize that removing coercive incentives reduces strategic misrepresentation under interaction."</td></tr></tbody></table>
+<h3>AI-2 — Governance Grammar</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>UAP provides consent/verification/recovery at the agent layer.</td></tr><tr><td><strong>Proof</strong></td><td>Implementation sketch</td></tr><tr><td><strong>Release wording</strong></td><td>"UAP provides a governance grammar for agent interaction, not a full alignment proof."</td></tr></tbody></table>
+<h3>AI-3 — Observer Paradox Resolution</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟡 Medium</td></tr><tr><td><strong>Claim</strong></td><td>Observation is harmful when it's forcing; UAP minimizes that harm.</td></tr><tr><td><strong>Proof</strong></td><td>Definitions + examples</td></tr><tr><td><strong>Release wording</strong></td><td>"We treat harmful observation as unconsented option-reduction; UAP turns observation into a consented verification act."</td></tr></tbody></table>
+<hr>
+<h2>Level B: Philosophy / Foundations</h2>
+<h3>PHI-1 — First Distinction</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>UAP is compatible with distinction-first foundation views.</td></tr><tr><td><strong>Proof</strong></td><td>Conceptual</td></tr><tr><td><strong>Release wording</strong></td><td>"UAP is compatible with distinction-first foundation views (e.g., minimal formalisms)."</td></tr></tbody></table>
+<h3>PHI-2 — Limit Discipline</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>F</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>You cannot positively specify 𝕋 without leaving it.</td></tr><tr><td><strong>Proof</strong></td><td>Logic</td></tr><tr><td><strong>Release wording</strong></td><td>"Any positive statement about the limit is a statement in language, hence outside the limit."</td></tr></tbody></table>
+<h3>PHI-3 — Reduction as Method (INIT0)</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I/F</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>INIT0 is "less" not "more" — reduction as method.</td></tr><tr><td><strong>Proof</strong></td><td>Procedure + re-derivations</td></tr><tr><td><strong>Release wording</strong></td><td>"INIT0 is presented as a generative reduction method, not an outcome claim."</td></tr></tbody></table>
+<hr>
+<h2>Level B: Organizations / Economics</h2>
+<h3>ORG-1 — Meeting Drift Reduction</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟡 Medium</td></tr><tr><td><strong>Claim</strong></td><td>UAP reduces reopenings and escalation.</td></tr><tr><td><strong>Proof</strong></td><td>Field measurements</td></tr><tr><td><strong>Release wording</strong></td><td>"We expect reduced reopenings and higher decision stability under explicit confirmation gates."</td></tr></tbody></table>
+<h3>ORG-2 — Psychological Safety</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟡 Medium</td></tr><tr><td><strong>Claim</strong></td><td>Consent gates increase psychological safety.</td></tr><tr><td><strong>Proof</strong></td><td>Surveys</td></tr><tr><td><strong>Release wording</strong></td><td>"Explicit opt-out and clarification reduce implicit coercion, a known driver of safety perceptions."</td></tr></tbody></table>
+<h3>ORG-3 — Operator Self-Removal</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>Mature processes need less control; protocol becomes less salient.</td></tr><tr><td><strong>Proof</strong></td><td>Plausibility</td></tr><tr><td><strong>Release wording</strong></td><td>"As coherence stabilizes, procedural overhead decreases; the protocol becomes less salient."</td></tr></tbody></table>
+<hr>
+<h2>Insight Claims (New)</h2>
+<h3>INS-1 — Insight is Internal Reconfiguration</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>F/I</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>Insight = new stable lock that persists without external enforcement.</td></tr><tr><td><strong>Release wording</strong></td><td>"Insight is a new stable lock that persists without external enforcement."</td></tr></tbody></table>
+<h3>INS-2 — Insight is Anti-Forcing</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>F</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>Forcing collapses option-space required for self-reconfiguration.</td></tr><tr><td><strong>Release wording</strong></td><td>"Forcing collapses option-space; UAP routes forcing to recovery rather than escalation."</td></tr></tbody></table>
+<h3>INS-3 — Snapshot as Transition Space</h3>
+<table><thead><tr><th>Aspect</th><th>Value</th></tr></thead><tbody><tr><td><strong>Type</strong></td><td>F</td></tr><tr><td><strong>Risk</strong></td><td>🟢 Low</td></tr><tr><td><strong>Claim</strong></td><td>A snapshot window is a bounded interval of temporary coherence dip under no external forcing.</td></tr><tr><td><strong>Release wording</strong></td><td>"A snapshot window is a bounded interval of temporary coherence dip under no external forcing."</td></tr></tbody></table>
+<hr>
+<h2>Legal Safety Statements (Copy-Paste Ready)</h2>
+<h3>Disclaimer (Paper)</h3>
+<blockquote><p>"UAP is presented as an operational interaction protocol and research artifact. It is not medical, psychological, legal, or security advice. No outcomes are guaranteed; effects depend on context, implementation, and participant consent."</p></blockquote>
+<h3>No Warranty (Repo)</h3>
+<blockquote><p>"This work is provided 'as is', without warranties of any kind. Use at your own risk."</p></blockquote>
+<h3>Anti-Misuse Clause</h3>
+<blockquote><p>"Any deployment that coerces participants, removes opt-out, or uses the protocol to compel assent is non-conformant with UAP by definition."</p></blockquote>
+<hr>
+<h2>Summary Statistics</h2>
+<table><thead><tr><th>Category</th><th>Low Risk</th><th>Medium Risk</th><th>High Risk</th><th>Total</th></tr></thead><tbody><tr><td>Core UAP</td><td>3</td><td>0</td><td>0</td><td>3</td></tr><tr><td>Software</td><td>3</td><td>0</td><td>0</td><td>3</td></tr><tr><td>Security</td><td>2</td><td>1</td><td>0</td><td>3</td></tr><tr><td>Psychology</td><td>2</td><td>1</td><td>0</td><td>3</td></tr><tr><td>Neuroscience</td><td>0</td><td>2</td><td>1</td><td>3</td></tr><tr><td>AI/AGI</td><td>1</td><td>2</td><td>0</td><td>3</td></tr><tr><td>Philosophy</td><td>3</td><td>0</td><td>0</td><td>3</td></tr><tr><td>Organizations</td><td>1</td><td>2</td><td>0</td><td>3</td></tr><tr><td>Insight</td><td>3</td><td>0</td><td>0</td><td>3</td></tr><tr><td><strong>Total</strong></td><td><strong>18</strong></td><td><strong>8</strong></td><td><strong>1</strong></td><td><strong>27</strong></td></tr></tbody></table>
+<hr>
+<h2>Reconciliation: "We Claim Little" vs "We Claim Much"</h2>
+<strong>The resolution:</strong>
+<ul><li>We claim <strong>much in breadth</strong> (many domains)</li><li>We claim <strong>little in kind</strong> (no ontology, no salvation, no guarantees)</li></ul>
+This is why it feels "rock solid" — minimal claims, maximal coverage.
+<hr>
+<h2>The Pattern Across All Claims</h2>
+<p>Every domain shows the same structure:</p>
+<blockquote><p><strong>Stable coordination requires:</strong> - Consent (options not reduced without permission) - Coherence (mutual understanding verified) - Recovery (return possible upon drift) - Space (for insight to occur)</p></blockquote>
+This is not coincidence. This is the grammar.
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><a href="/b/uap-and-justice/">←</a><a href="/b/uap-claim-registry-v01/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-claim-register/"></a>
+<a class="switch-block white" href="/w/uap-claim-register/"></a>
+<a class="switch-block black active" href="/b/uap-claim-register/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

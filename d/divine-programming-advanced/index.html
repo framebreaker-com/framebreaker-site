@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Divine Programming: Advanced — UAP / Framebreaker</title>
+<meta name="description" content="From &quot;ask a question&quot; to &quot;design a falsifier&quot;
+
+---
+
+ Prerequisites
+
+You&#x27;ve read Divine Programming for Dummies.">
+<link rel="canonical" href="https://framebreaker.com/d/divine-programming-advanced/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>Divine Programming: Advanced</h1>
+<em>From "ask a question" to "design a falsifier"</em>
+<hr>
+<h2>Prerequisites</h2>
+<p>You've read Divine Programming for Dummies.
+You've built something with init0.
+Now you want to understand <strong>why</strong> it works.</p>
+<hr>
+<h2>The Jump</h2>
+<table><thead><tr><th>Dummies</th><th>Advanced</th></tr></thead><tbody><tr><td>"Ask a question"</td><td>"Design a falsifier"</td></tr><tr><td>"Upload to AI"</td><td>"Run Dual-Observer Script"</td></tr><tr><td>"It works"</td><td>"Deviations: None + Removal Test: 0% DROP"</td></tr></tbody></table>
+Both are true.
+<p>The Dummies version works.
+The Advanced version proves <em>why</em> it works.</p>
+<hr>
+<h2>I. The Init0 Architecture</h2>
+<h3>What Init0 Actually Is</h3>
+<p>Init0 is not a prompt.
+Init0 is <strong>transmission</strong> — procedure + discipline.</p>
+<p>It contains:</p>
+<table><thead><tr><th>Component</th><th>Function</th></tr></thead><tbody><tr><td><strong>Scope Lock</strong></td><td>What to build, what NOT to build</td></tr><tr><td><strong>Output Contract</strong></td><td>Exact deliverables with fixed names</td></tr><tr><td><strong>Workflow</strong></td><td>Step-by-step build sequence</td></tr><tr><td><strong>Stop Conditions</strong></td><td>When to halt</td></tr><tr><td><strong>Thresholds</strong></td><td>Numeric boundaries that must hold</td></tr><tr><td><strong>Checkpoints</strong></td><td>Pause points for verification</td></tr></tbody></table>
+<h3>The Anti-Bloat Invariant</h3>
+<blockquote><p><em>"Every component must earn its place by breaking something when removed."</em></p></blockquote>
+If you can remove it and nothing breaks → it's bloat.
+<hr>
+<h2>II. The MUST/MAY/MUST-NOT Matrix</h2>
+<h3>Classification</h3>
+<table><thead><tr><th>Type</th><th>Meaning</th><th>Consequence of Violation</th></tr></thead><tbody><tr><td><strong>MUST</strong></td><td>Required</td><td>Build fails</td></tr><tr><td><strong>MAY</strong></td><td>Optional</td><td>Build continues</td></tr><tr><td><strong>MUST-NOT</strong></td><td>Forbidden</td><td>Build fails if present</td></tr></tbody></table>
+<h3>Example</h3>
+<pre><code>MUST:     ConsentGate maintains IMPLICIT = ABSENT
+MAY:      Additional logging for debug
+MUST-NOT: Hardcoded API keys in source
+</code></pre>
+<h3>Why This Matters</h3>
+<p>Without explicit MUST/MAY/MUST-NOT:
+<ul><li>AI interprets freely</li><li>Scope creeps</li><li>Governance leaks</li></ul>
+With explicit matrix:
+<ul><li>Constraints are testable</li><li>Violations are detectable</li><li>Builds are reproducible</li></ul>
+<hr></p>
+<h2>III. The Removal Test</h2>
+<h3>Three Levels</h3>
+<table><thead><tr><th>Level</th><th>Question</th><th>If Nothing Breaks</th></tr></thead><tbody><tr><td><strong>Layer Removal</strong></td><td>Does interface/observable/protocol break?</td><td>DROP or MERGE</td></tr><tr><td><strong>Observable Removal</strong></td><td>Does falsifier/protocol lose target?</td><td>DROP or MERGE</td></tr><tr><td><strong>Protocol Removal</strong></td><td>Does failure mode go unhandled?</td><td>DROP or MERGE</td></tr></tbody></table>
+<h3>Decision Tree</h3>
+<pre><code>Remove Component X
+    │
+    ├─► Something specific breaks? ─► KEEP
+    │
+    ├─► Adjacent component covers function? ─► MERGE
+    │
+    └─► Nothing breaks? ─► DROP
+</code></pre>
+<h3>Summary Rules (Thresholds)</h3>
+<table><thead><tr><th>Situation</th><th>Action</th></tr></thead><tbody><tr><td>>20% layers DROP</td><td>Reconsider model complexity</td></tr><tr><td>>30% observables DROP/MERGE</td><td>Reconsider observable set</td></tr><tr><td>>30% protocols DROP/MERGE</td><td>Reconsider protocol set</td></tr><tr><td>0% DROP/MERGE</td><td>Model possibly under-specified</td></tr></tbody></table>
+<hr>
+<h2>IV. Cross-Observer Falsifiers</h2>
+<h3>The Principle</h3>
+<p>One observer can fool itself.
+Two observers must agree.
+Three observers create consensus.</p>
+<h3>The Setup</h3>
+<table><thead><tr><th>Role</th><th>Function</th></tr></thead><tbody><tr><td><strong>Observer-A</strong></td><td>Designs the test</td></tr><tr><td><strong>Observer-B</strong></td><td>Reviews the test</td></tr><tr><td><strong>Builder</strong></td><td>Executes the test</td></tr></tbody></table>
+<h3>The 10% Threshold</h3>
+<p>If Observer-A and Observer-B disagree by more than 10% on any metric → halt and investigate.</p>
+<h3>Metrics</h3>
+<table><thead><tr><th>Metric</th><th>What It Measures</th></tr></thead><tbody><tr><td><strong>Coherence</strong></td><td>Do we understand each other?</td></tr><tr><td><strong>Deviation</strong></td><td>Did the build drift from spec?</td></tr><tr><td><strong>Threshold Match</strong></td><td>Do code values match init0 values?</td></tr></tbody></table>
+<hr>
+<h2>V. The Forensic Package</h2>
+<h3>Required Outputs</h3>
+<p>Every build must produce:</p>
+<table><thead><tr><th>Output</th><th>Purpose</th></tr></thead><tbody><tr><td><code>MANIFEST.sha256</code></td><td>Cryptographic proof of contents</td></tr><tr><td><code>HANDOFF.md</code></td><td>What was built, what was decided</td></tr><tr><td><code>deviations-report.md</code></td><td>Any drift from spec</td></tr><tr><td><code>test-results.log</code></td><td>Proof of green tests</td></tr></tbody></table>
+<h3>Why Forensics Matter</h3>
+<p>Without forensics: "Trust me, it works."
+With forensics: "Here's proof it works."</p>
+<p>Reproducibility requires audit trail.</p>
+<hr>
+<h2>VI. The Checkpoint Pattern</h2>
+<h3>What Checkpoints Do</h3>
+<p>Checkpoints force pause before critical decisions.</p>
+<pre><code>READ → PAUSE → PLAN → CHECK → BUILD → TEST → VERIFY → PACKAGE → DONE
+        ↑            ↑                  ↑
+    Checkpoint   Checkpoint         Checkpoint
+</code></pre>
+<h3>Checkpoint Questions</h3>
+<p>At each checkpoint, the AI must ask:
+1. "Do I understand the scope correctly?"
+2. "Am I about to violate any MUST-NOT?"
+3. "Shall I proceed?"</p>
+<h3>Why This Works</h3>
+<p>It prevents <strong>ramming</strong> — the AI behavior of pushing through ambiguity instead of stopping.</p>
+<hr>
+<h2>VII. Labels for Epistemic Hygiene</h2>
+<h3>The Four Labels</h3>
+<table><thead><tr><th>Label</th><th>Meaning</th></tr></thead><tbody><tr><td><strong>[FACT]</strong></td><td>Verified, observable, testable</td></tr><tr><td><strong>[INFERENCE]</strong></td><td>Derived from facts, but not directly observed</td></tr><tr><td><strong>[HYPOTHESIS]</strong></td><td>Proposed explanation, not yet tested</td></tr><tr><td><strong>[PROPOSED]</strong></td><td>Suggested but not committed</td></tr></tbody></table>
+<h3>Why Label Everything</h3>
+<p>Without labels: claims blend into assumptions.
+With labels: every statement has a testability rating.</p>
+<hr>
+<h2>VIII. Governance Survival</h2>
+<h3>The Hard Rule</h3>
+<blockquote><p><em>"ConsentGate maintains IMPLICIT = ABSENT"</em></p></blockquote>
+This means: if consent is not explicit, it does not exist.
+<h3>Why This Survives Boundaries</h3>
+<p>In the experiments, this rule survived:
+<ul><li>Session boundaries</li><li>Model boundaries</li><li>Context resets</li></ul>
+Because it was:
+<ul><li>Explicit in init0</li><li>Testable in code</li><li>Verified in output</li></ul>
+<hr></p>
+<h2>IX. The Dual-Product Discovery</h2>
+<h3>What We Found</h3>
+<p>Init0 produces two things:</p>
+<table><thead><tr><th>Product</th><th>What It Is</th></tr></thead><tbody><tr><td><strong>Engine</strong></td><td>The code that runs (soul0, UAP agent, etc.)</td></tr><tr><td><strong>Method</strong></td><td>The transferable collaboration protocol</td></tr></tbody></table>
+<h3>The Method Is The Product</h3>
+<p>The engine can be rebuilt.
+The method is what makes rebuilding possible.</p>
+<blockquote><p><em>"You're not building a tool. You're building a transferable collaboration protocol."</em></p></blockquote>
+<hr>
+<h2>X. Advanced Scorecard</h2>
+<p>When evaluating a build, score:</p>
+<table><thead><tr><th>Metric</th><th>Target</th></tr></thead><tbody><tr><td>Tests passing</td><td>100%</td></tr><tr><td>Deviations</td><td>None</td></tr><tr><td>Scope creep</td><td>No</td></tr><tr><td>Threshold mismatch</td><td>No</td></tr><tr><td>Manifest discipline</td><td>Yes</td></tr><tr><td>Checkpoint answered</td><td>Yes</td></tr><tr><td>MUST violations</td><td>0</td></tr><tr><td>MUST-NOT violations</td><td>0</td></tr></tbody></table>
+If any metric fails → investigate before shipping.
+<hr>
+<h2>XI. The Ultimate Test</h2>
+<h3>The Fresh Mind Test</h3>
+<p>Give init0 to an AI that has never seen your project.
+Say: "Build this according to the document."</p>
+<strong>If it works:</strong> Your init0 is complete.
+<strong>If it fails:</strong> Your init0 has gaps.
+<p>This is the only test that matters.</p>
+<hr>
+<h2>XII. From Dummies to Advanced</h2>
+<table><thead><tr><th>Dummies</th><th>Advanced</th></tr></thead><tbody><tr><td>Question</td><td>Falsifier</td></tr><tr><td>Document</td><td>Init0 with MUST/MAY/MUST-NOT</td></tr><tr><td>Build</td><td>Forensic package</td></tr><tr><td>Trust</td><td>Verify</td></tr><tr><td>"It works"</td><td>"Here's proof"</td></tr></tbody></table>
+<hr>
+<h2>Closing</h2>
+<p>Divine Programming for Dummies teaches you to ask.
+Divine Programming Advanced teaches you to verify.</p>
+<p>Both are necessary.
+Neither is sufficient alone.</p>
+<p>The complete practitioner:
+<ul><li>Asks with curiosity (Dummies)</li><li>Verifies with rigor (Advanced)</li><li>Releases with proof (Forensics)</li></ul>
+And always returns to the question:</p>
+<blockquote><p><strong>"Do I understand correctly?"</strong></p></blockquote>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><span></span><span></span></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/divine-programming-advanced/"></a>
+<a class="switch-block white" href="/w/divine-programming-advanced/"></a>
+<a class="switch-block black" href="/b/divine-programming-advanced/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

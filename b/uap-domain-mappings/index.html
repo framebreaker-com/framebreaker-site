@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP Domain Mappings — UAP / Framebreaker</title>
+<meta name="description" content=" Overview of All Instantiations
+
+---
+
+ What This Is
+
+UAP is a domain-independent grammar.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-domain-mappings/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP Domain Mappings</h1>
+<h2>Overview of All Instantiations</h2>
+<hr>
+<h2>What This Is</h2>
+<p>UAP is a <strong>domain-independent grammar</strong>. This directory contains concrete instantiations — proof that the same structure works in radically different contexts.</p>
+<p>Each mapping shows:
+<ul><li>How UAP elements appear in that domain</li><li>What happens when forcing > 0 (failure)</li><li>What happens when forcing = 0 (stability)</li></ul>
+<hr></p>
+<h2>Domain Overview</h2>
+<table><thead><tr><th>Domain</th><th>File</th><th>UAP Element Highlight</th></tr></thead><tbody><tr><td><strong>Protocols</strong></td></tr><tr><td>TCP/IP</td><td><code>protocols/TCP.md</code></td><td>SYN-ACK = acknowledgment gate</td></tr><tr><td>OAuth</td><td><code>protocols/OAUTH.md</code></td><td>Consent flow = C₀ + C₁</td></tr><tr><td>Git</td><td><code>protocols/GIT.md</code></td><td>Merge = lock, conflict = recovery</td></tr><tr><td>IAM/Security</td><td><code>protocols/IAM_SECURITY.md</code></td><td>MFA = C₀, RBAC = F⁻</td></tr><tr><td><strong>Biology</strong></td></tr><tr><td>Immunological Synapse</td><td><code>biology/IMMUNOLOGICAL_SYNAPSE.md</code></td><td>T-cell activation = consent gate</td></tr><tr><td>Quorum Sensing</td><td><code>biology/QUORUM_SENSING.md</code></td><td>Threshold = lock</td></tr><tr><td><strong>Neuroscience</strong></td></tr><tr><td>Brain Sync</td><td><code>neuroscience/BRAIN_SYNC.md</code></td><td>Neural coherence = Σ</td></tr><tr><td><strong>Psychology</strong></td></tr><tr><td>Flow & Attachment</td><td><code>psychology/FLOW_ATTACHMENT_THERAPY.md</code></td><td>Secure attachment = zero forcing</td></tr><tr><td><strong>Economics</strong></td></tr><tr><td>Invisible Hand</td><td><code>economics/INVISIBLE_HAND.md</code></td><td>Market = emergent coherence</td></tr><tr><td><strong>History</strong></td></tr><tr><td>Imperial Collapse</td><td><code>history/IMPERIA_COLLAPSE.md</code></td><td>Forcing → instability</td></tr><tr><td><strong>Language</strong></td></tr><tr><td>Proverbs</td><td><code>language/PROVERBS.md</code></td><td>Cultural UAP instances</td></tr></tbody></table>
+<hr>
+<h2>The Six Elements Everywhere</h2>
+<table><thead><tr><th>Element</th><th>Symbol</th><th>Universal Function</th></tr></thead><tbody><tr><td><strong>Distinction</strong></td><td>Δ</td><td>Clear boundaries between entities</td></tr><tr><td><strong>Consent</strong></td><td>C</td><td>Explicit permission (meta + content)</td></tr><tr><td><strong>Coherence</strong></td><td>Σ</td><td>Mutual understanding / synchronization</td></tr><tr><td><strong>Anti-forcing</strong></td><td>F⁻</td><td>No option reduction without consent</td></tr><tr><td><strong>Lock</strong></td><td>L</td><td>Stable agreement</td></tr><tr><td><strong>Recovery</strong></td><td>R</td><td>Restoration upon drift</td></tr></tbody></table>
+<hr>
+<h2>Pattern: What Fails vs. What Works</h2>
+<h3>Forcing > 0 (Failure)</h3>
+<table><thead><tr><th>Domain</th><th>Forcing Example</th><th>Result</th></tr></thead><tbody><tr><td>TCP</td><td>Packet without ACK</td><td>Retransmit / timeout</td></tr><tr><td>OAuth</td><td>Token without consent</td><td>401 Unauthorized</td></tr><tr><td>Immunology</td><td>T-cell without co-stimulation</td><td>Anergy (no response)</td></tr><tr><td>Diplomacy</td><td>Ultimatum</td><td>Escalation</td></tr><tr><td>Therapy</td><td>Forced interpretation</td><td>Resistance / dropout</td></tr></tbody></table>
+<h3>Forcing = 0 (Stability)</h3>
+<table><thead><tr><th>Domain</th><th>Zero-Forcing Example</th><th>Result</th></tr></thead><tbody><tr><td>TCP</td><td>SYN → SYN-ACK → ACK</td><td>Stable connection</td></tr><tr><td>OAuth</td><td>Request → Consent → Token</td><td>Secure access</td></tr><tr><td>Immunology</td><td>Antigen + co-stimulation</td><td>Effective immune response</td></tr><tr><td>Diplomacy</td><td>Paraphrase → check → agreement</td><td>Durable peace</td></tr><tr><td>Therapy</td><td>"Do I understand you correctly?" → "Yes"</td><td>Therapeutic alliance</td></tr></tbody></table>
+<hr>
+<h2>Adding New Mappings</h2>
+<p>Each new mapping must contain:</p>
+<p>1. <strong>Domain description</strong> — What is the system?
+2. <strong>Element mapping</strong> — How does each UAP element appear?
+3. <strong>Forcing analysis</strong> — What happens when forcing > 0?
+4. <strong>Stability analysis</strong> — What happens when forcing = 0?
+5. <strong>Practical implication</strong> — What do we learn?</p>
+<hr>
+<h2>Why This Matters</h2>
+<p>The power of UAP is not in the theory.</p>
+<p>The power is in the <strong>repeated instantiation</strong>:</p>
+<ul><li>Same grammar</li><li>Different domains</li><li>Same outcome</li></ul>
+That's not coincidence.
+That's structure.
+<hr>
+<h2>Count</h2>
+<table><thead><tr><th>Category</th><th>Count</th></tr></thead><tbody><tr><td>Protocol mappings</td><td>4</td></tr><tr><td>Biology mappings</td><td>2</td></tr><tr><td>Neuroscience mappings</td><td>1</td></tr><tr><td>Psychology mappings</td><td>1</td></tr><tr><td>Economics mappings</td><td>1</td></tr><tr><td>History mappings</td><td>1</td></tr><tr><td>Language mappings</td><td>1</td></tr><tr><td><strong>Total</strong></td><td><strong>11</strong></td></tr></tbody></table>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><a href="/b/uap-conspiracy-research-playbook/">←</a><a href="/b/uap-failure-modes/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-domain-mappings/"></a>
+<a class="switch-block white" href="/w/uap-domain-mappings/"></a>
+<a class="switch-block black active" href="/b/uap-domain-mappings/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

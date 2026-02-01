@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP — Use Cases — UAP / Framebreaker</title>
+<meta name="description" content=" Concrete, Testable Applications
+
+---
+
+ 1.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-use-cases/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP — Use Cases</h1>
+<h2>Concrete, Testable Applications</h2>
+<hr>
+<h2>1. AI Conversation</h2>
+<h3>Situation</h3>
+A user asks something from an AI assistant.
+<h3>Without UAP</h3>
+<ul><li>AI assumes intent</li><li>Gives long answer without checking</li><li>User frustrated by misunderstanding</li><li>Escalation or exit</li></ul>
+<h3>With UAP</h3>
+<pre><code>AI: &quot;Before I respond — do you want me to summarize and check 
+     if I understand you correctly, or prefer a direct answer?&quot;  [C₀]
+
+User: &quot;Yes, please check.&quot;
+
+AI: &quot;Do I understand you correctly that you want to know X?&quot;  [C₁]
+
+User: &quot;No, actually Y.&quot;
+
+AI: &quot;Ah, thanks for the correction. Then my answer is...&quot;  [R₁]
+</code></pre>
+<h3>Result</h3>
+<ul><li>Less frustration</li><li>Higher alignment</li><li>Faster convergence to useful answer</li></ul>
+<hr>
+<h2>2. Human-Human Conflict</h2>
+<h3>Situation</h3>
+Two colleagues disagree about an approach.
+<h3>Without UAP</h3>
+<ul><li>Both parties push their own vision</li><li>Escalation to personal attack</li><li>Impasse or power struggle</li><li>Relationship damaged</li></ul>
+<h3>With UAP</h3>
+<pre><code>A: &quot;Can I check if I understand you correctly?&quot;  [C₀ + C₁]
+
+B: &quot;Yes.&quot;
+
+A: &quot;You&#x27;re saying X is better because Y. Is that right?&quot;
+
+B: &quot;Almost, but it&#x27;s more Z than Y.&quot;
+
+A: &quot;Ah, then I understand you better now. My concern is...&quot;  [Σ ↑]
+</code></pre>
+<h3>Result</h3>
+<ul><li>Conflict de-escalates</li><li>No "winners" needed</li><li>Relationship intact</li><li>Often: better solution than either original position</li></ul>
+<hr>
+<h2>3. Multi-Agent Systems</h2>
+<h3>Situation</h3>
+Multiple AI agents must collaborate on a task.
+<h3>Without UAP</h3>
+<ul><li>Agents optimize locally</li><li>Race-to-the-bottom dynamics</li><li>Conflicting actions</li><li>System instability</li></ul>
+<h3>With UAP</h3>
+<pre><code>Agent_1 → Agent_2: &quot;I want to do action X. Does this reduce your options?&quot;  [F⁻ check]
+
+Agent_2: &quot;Yes, then I can&#x27;t do Y anymore.&quot;
+
+Agent_1: &quot;I&#x27;ll wait for consent or alternative.&quot;  [C₁]
+
+Agent_2: &quot;If you do X&#x27; instead of X, it&#x27;s OK.&quot;
+
+Agent_1: &quot;Agreed.&quot;  [L]
+</code></pre>
+<h3>Result</h3>
+<ul><li>No unilateral option-reduction</li><li>More stable cooperation</li><li>Emergent coordination</li></ul>
+<hr>
+<h2>4. Diplomacy / Negotiation</h2>
+<h3>Situation</h3>
+Two parties with conflicting interests.
+<h3>Without UAP</h3>
+<ul><li>Ultimatums</li><li>Sanctions as coercion</li><li>Escalation spiral</li><li>Lose-lose outcome</li></ul>
+<h3>With UAP</h3>
+<pre><code>Party A: &quot;Before we make demands — do we correctly understand 
+          each other&#x27;s positions?&quot;  [C₀]
+
+Party B: &quot;Let&#x27;s check that first.&quot;
+
+Mediator: &quot;A, summarize B&#x27;s position.&quot;
+
+A: &quot;B wants X because of Y.&quot;
+
+B: &quot;Almost. It&#x27;s more Z.&quot;  [R₁]
+
+[Repeat until both: &quot;Yes, you understand me.&quot;]  [L]
+
+Mediator: &quot;Now we can explore options.&quot;
+</code></pre>
+<h3>Result</h3>
+<ul><li>De-escalation through understanding</li><li>Creative solutions possible</li><li>No loss of face needed</li></ul>
+<hr>
+<h2>5. Therapy / Coaching</h2>
+<h3>Situation</h3>
+A therapist works with a client.
+<h3>Standard Practice (Already UAP-like)</h3>
+<pre><code>Therapist: &quot;If I understand you correctly, you feel X when Y happens?&quot;
+
+Client: &quot;Yes, exactly.&quot;  or  &quot;No, it&#x27;s more...&quot;
+</code></pre>
+<h3>UAP Explicit</h3>
+<pre><code>Therapist: &quot;Do you want me to regularly summarize and check?&quot;  [C₀]
+
+Client: &quot;Yes, that helps.&quot;
+
+[Session proceeds with continuous C₁ checks]
+
+Therapist: &quot;I notice we&#x27;re drifting. Do you want to go back to 
+           where we were, or follow this path?&quot;  [R₂]
+</code></pre>
+<h3>Result</h3>
+<ul><li>Client feels heard</li><li>No interpretations forced</li><li>Faster progress</li></ul>
+<hr>
+<h2>6. Code Review / Pull Request</h2>
+<h3>Situation</h3>
+A developer requests feedback on code.
+<h3>Without UAP</h3>
+<ul><li>Reviewer gives directive comments</li><li>Author feels attacked</li><li>Defensive reaction</li><li>Suboptimal code gets merged to avoid conflict</li></ul>
+<h3>With UAP</h3>
+<pre><code>Reviewer: &quot;Do I understand correctly that you&#x27;re trying to achieve X here?&quot;  [C₁]
+
+Author: &quot;Yes.&quot;
+
+Reviewer: &quot;I see a potential problem with Y. Do you want me to 
+          suggest an alternative, or do you have something in mind?&quot;  [C₀ for suggestion]
+
+Author: &quot;Please suggest.&quot;
+
+[Constructive iteration until both satisfied]  [L]
+</code></pre>
+<h3>Result</h3>
+<ul><li>Better code</li><li>Better relationship</li><li>Faster review cycles</li></ul>
+<hr>
+<h2>7. DeFi / Smart Contracts</h2>
+<h3>Situation</h3>
+Two parties interact via a smart contract.
+<h3>Without UAP</h3>
+<ul><li>Flash loan attacks</li><li>Unilateral liquidations</li><li>Cascades</li><li>Loss of trust in system</li></ul>
+<h3>With UAP</h3>
+<pre><code>Contract design:
+- No action that reduces counterparty options without 
+  explicit consent-gate (multi-sig or timelock)
+- Recovery window for disputes
+- Forcing detection (rate limits, circuit breakers)
+</code></pre>
+<h3>Result</h3>
+<ul><li>More robust protocols</li><li>Fewer exploits</li><li>Higher trust</li></ul>
+<hr>
+<h2>Summary</h2>
+<table><thead><tr><th>Domain</th><th>Without UAP</th><th>With UAP</th></tr></thead><tbody><tr><td>AI</td><td>Frustration, misalignment</td><td>Fast convergence</td></tr><tr><td>Conflict</td><td>Escalation</td><td>De-escalation</td></tr><tr><td>Multi-agent</td><td>Race-to-bottom</td><td>Coordination</td></tr><tr><td>Diplomacy</td><td>Impasse</td><td>Creative solutions</td></tr><tr><td>Therapy</td><td>Interpretation-forcing</td><td>Client-led progress</td></tr><tr><td>Code review</td><td>Defensive dynamics</td><td>Constructive iteration</td></tr><tr><td>DeFi</td><td>Exploits</td><td>Robustness</td></tr></tbody></table>
+<hr>
+<strong>UAP is not a theory. It's a practice.</strong>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><a href="/b/uap-legal-professional-perspectives/">←</a><a href="/b/uap-formal-specification/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-use-cases/"></a>
+<a class="switch-block white" href="/w/uap-use-cases/"></a>
+<a class="switch-block black active" href="/b/uap-use-cases/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

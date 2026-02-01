@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP Failure Modes — UAP / Framebreaker</title>
+<meta name="description" content=" When and How UAP Can Fail
+
+---
+
+ Purpose
+
+No protocol is perfect.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-failure-modes/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP Failure Modes</h1>
+<h2>When and How UAP Can Fail</h2>
+<hr>
+<h2>Purpose</h2>
+<p>No protocol is perfect. This document specifies known failure modes and limitations.</p>
+<hr>
+<h2>Failure Mode Categories</h2>
+<h3>1. Implementation Failures</h3>
+<p>UAP correctly specified, but incorrectly implemented.</p>
+<table><thead><tr><th>Failure</th><th>Description</th><th>Detection</th></tr></thead><tbody><tr><td><strong>Fake consent</strong></td><td>"Yes" without understanding</td><td>Coherence drops later</td></tr><tr><td><strong>Mechanical questions</strong></td><td>Asking without listening</td><td>No actual Σ increase</td></tr><tr><td><strong>Consent theater</strong></td><td>Going through motions</td><td>Pattern without substance</td></tr><tr><td><strong>Recovery avoidance</strong></td><td>Not acknowledging drift</td><td>Σ continues dropping</td></tr></tbody></table>
+<h3>2. Structural Failures</h3>
+<p>Situations where UAP cannot be applied.</p>
+<table><thead><tr><th>Failure</th><th>Description</th><th>Limitation</th></tr></thead><tbody><tr><td><strong>Power asymmetry</strong></td><td>One party cannot say no</td><td>F⁻ cannot be enforced</td></tr><tr><td><strong>Information asymmetry</strong></td><td>One party lacks knowledge</td><td>C₁ cannot be meaningful</td></tr><tr><td><strong>Time pressure</strong></td><td>No space for verification</td><td>Consent is compressed</td></tr><tr><td><strong>Coercive context</strong></td><td>Exit is not possible</td><td>C₀ is violated structurally</td></tr></tbody></table>
+<h3>3. Adversarial Failures</h3>
+<p>Deliberate attempts to exploit UAP.</p>
+<table><thead><tr><th>Attack</th><th>Description</th><th>Mitigation</th></tr></thead><tbody><tr><td><strong>Consent manipulation</strong></td><td>Getting "yes" through deception</td><td>Σ checks over time</td></tr><tr><td><strong>Coherence faking</strong></td><td>Pretending to understand</td><td>Probe with specific questions</td></tr><tr><td><strong>Meta-gaming</strong></td><td>Using UAP language to force</td><td>Pattern detection</td></tr><tr><td><strong>Recovery blocking</strong></td><td>Preventing return to previous state</td><td>External arbitration</td></tr></tbody></table>
+<hr>
+<h2>Specific Failure Scenarios</h2>
+<h3>Scenario 1: The Fake Question</h3>
+<pre><code>A: &quot;Do I understand you correctly that you want X?&quot;
+B: &quot;Yes.&quot;
+[A proceeds to do Y, claiming B consented]
+</code></pre>
+<strong>Problem:</strong> C₁ was asked but not honored.
+<strong>Detection:</strong> Check if action matches stated understanding.
+<h3>Scenario 2: The Pressured Consent</h3>
+<pre><code>A: &quot;Do you want to continue? We need to decide now.&quot;
+B: &quot;I guess...&quot;
+[A treats this as lock]
+</code></pre>
+<strong>Problem:</strong> Time pressure undermines genuine consent.
+<strong>Detection:</strong> "I guess" is not "yes."
+<h3>Scenario 3: The Meta-Force</h3>
+<pre><code>A: &quot;UAP says we need to check understanding. Do you agree?&quot;
+B: &quot;I&#x27;d rather not—&quot;
+A: &quot;But UAP requires it. You&#x27;re violating the protocol.&quot;
+</code></pre>
+<strong>Problem:</strong> Using UAP to force compliance with UAP.
+<strong>Detection:</strong> This is F > 0 (forcing), regardless of framing.
+<h3>Scenario 4: The Exit Block</h3>
+<pre><code>A: &quot;I want to stop this conversation.&quot;
+B: &quot;We can&#x27;t stop until we reach resolution.&quot;
+</code></pre>
+<strong>Problem:</strong> R₃ (meta-consent withdrawal) is blocked.
+<strong>Detection:</strong> Any blocking of exit is UAP violation.
+<hr>
+<h2>Measurement Limitations</h2>
+<h3>Coherence Measurement</h3>
+<strong>Problem:</strong> Σ is not directly measurable.
+<strong>Current proxies:</strong>
+<ul><li>Paraphrase accuracy</li><li>Question quality</li><li>Response appropriateness</li><li>Long-term stability</li></ul>
+<strong>Limitation:</strong> Proxies can be gamed.
+<h3>Forcing Detection</h3>
+<strong>Problem:</strong> Forcing is not always obvious.
+<strong>Current detection:</strong>
+<ul><li>Explicit threats: clear</li><li>Time pressure: detectable</li><li>Subtle framing: hard</li><li>Structural coercion: context-dependent</li></ul>
+<strong>Limitation:</strong> Sophisticated forcing is hard to detect.
+<h3>Consent Verification</h3>
+<strong>Problem:</strong> "Yes" doesn't always mean yes.
+<strong>Current verification:</strong>
+<ul><li>Check consistency</li><li>Ask follow-up questions</li><li>Observe subsequent behavior</li><li>Allow time for change</li></ul>
+<strong>Limitation:</strong> Simulated consent can be sophisticated.
+<hr>
+<h2>System-Level Failures</h2>
+<h3>Scalability</h3>
+<strong>Problem:</strong> UAP is designed for dyadic interaction. How does it scale?
+<strong>Known issues:</strong>
+<ul><li>Multi-party consent is complex</li><li>Coherence measurement across groups is hard</li><li>Recovery in organizations is political</li></ul>
+<h3>Speed</h3>
+<strong>Problem:</strong> UAP requires verification, which takes time.
+<strong>Trade-off:</strong>
+<ul><li>Fast interaction may skip checks</li><li>Critical interactions need full protocol</li><li>Context determines appropriate level</li></ul>
+<h3>Adversarial Environments</h3>
+<strong>Problem:</strong> What if the other party is deliberately adversarial?
+<strong>Limitation:</strong>
+<ul><li>UAP cannot force participation</li><li>UAP cannot prevent all manipulation</li><li>UAP can only keep your side clean</li></ul>
+<hr>
+<h2>Honest Assessment</h2>
+<h3>What UAP Can Do</h3>
+<ul><li>Provide structure for stable interaction</li><li>Detect obvious forcing</li><li>Enable recovery from drift</li><li>Scale from conversation to protocol design</li></ul>
+<h3>What UAP Cannot Do</h3>
+<ul><li>Prevent all manipulation</li><li>Work without minimal good faith</li><li>Guarantee correct understanding</li><li>Force adversaries to cooperate</li></ul>
+<hr>
+<h2>Summary</h2>
+<p>UAP is not a panacea. It's a grammar with known limitations:</p>
+<table><thead><tr><th>Category</th><th>Summary</th></tr></thead><tbody><tr><td>Implementation</td><td>Can be done badly</td></tr><tr><td>Structural</td><td>Requires minimal conditions</td></tr><tr><td>Adversarial</td><td>Can be exploited</td></tr><tr><td>Measurement</td><td>Uses proxies</td></tr><tr><td>Scalability</td><td>Designed for dyadic</td></tr></tbody></table>
+<strong>Knowing the failures makes the protocol stronger, not weaker.</strong>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><a href="/b/uap-domain-mappings/">←</a><a href="/b/uap-falsifiers/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-failure-modes/"></a>
+<a class="switch-block white" href="/w/uap-failure-modes/"></a>
+<a class="switch-block black active" href="/b/uap-failure-modes/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

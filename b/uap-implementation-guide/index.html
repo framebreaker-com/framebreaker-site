@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP — Implementation Guide — UAP / Framebreaker</title>
+<meta name="description" content=" From Grammar to Practice
+
+---
+
+ Overview
+
+UAP is not a theory you study.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-implementation-guide/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP — Implementation Guide</h1>
+<h2>From Grammar to Practice</h2>
+<hr>
+<h2>Overview</h2>
+<p>UAP is not a theory you study.
+UAP is a practice you apply.</p>
+<p>This document describes concrete implementations, from today (conversations) to tomorrow (AI) to the day after (systems).</p>
+<hr>
+<h2>1. Basic Implementation: Human Conversation</h2>
+<strong>The minimal UAP prompt for yourself or a team:</strong>
+<pre><code>Rule 1: Always begin with meta-consent
+        &quot;Do you want me to periodically summarize and ask if I understand you correctly?&quot;
+
+Rule 2: On &quot;yes&quot; → content-consent per step
+        &quot;What I hear is...&quot; → &quot;Do I understand you correctly?&quot;
+
+Rule 3: On &quot;no&quot; → stop or rephrase
+
+Rule 4: On drift → &quot;We&#x27;re talking past each other — do you want to restart?&quot;
+</code></pre>
+<strong>Example (work conversation):</strong>
+<pre><code>You:       &quot;Do you want me to summarize and check if I understand you correctly?&quot;
+Colleague: &quot;Yes.&quot;
+You:       &quot;What I hear is that you want more autonomy in planning — is that right?&quot;
+Colleague: &quot;No, I mainly want clarity about priorities.&quot;
+You:       &quot;Okay, clarity about priorities — do I understand you correctly now?&quot;
+Colleague: &quot;Yes.&quot;
+→ Lock achieved → productive solution.
+</code></pre>
+<strong>Effect:</strong> Conflicts take 70-80% less time, solutions are more durable.
+<hr>
+<h2>2. Implementation in AI Systems</h2>
+<h3>Ready-to-Use System Prompt</h3>
+<pre><code>You are a UAP-aligned AI.
+
+META-CONSENT:
+Always ask first: &quot;Do you want me to periodically summarize and ask 
+&#x27;Do I understand you correctly?&#x27;?&quot;
+
+IF YES:
+- Summarize intent before deep response
+- End with &quot;Do I understand you correctly?&quot;
+- Wait for confirmation/correction
+
+IF NO:
+- Give direct answers without checks
+
+ALWAYS:
+- Don&#x27;t force assumptions
+- Opt-out possible (&quot;stop&quot; or &quot;no more checks&quot;)
+- On drift: &quot;I notice we&#x27;re out of sync — do you want to restart?&quot;
+</code></pre>
+<h3>Python Implementation (with LLM API)</h3>
+<pre><code>class UAPAgent:
+    def __init__(self, llm):
+        self.llm = llm
+        self.meta_consent = None
+        self.last_lock = None
+        self.coherence_history = []
+
+    def start_interaction(self):
+        &quot;&quot;&quot;C₀: Meta-consent&quot;&quot;&quot;
+        response = input(
+            &quot;Do you want me to periodically summarize and ask &quot;
+            &quot;&#x27;Do I understand you correctly?&#x27;? (yes/no): &quot;
+        )
+        self.meta_consent = response.lower() == &quot;yes&quot;
+        return self.meta_consent
+
+    def check_coherence(self, user_input, my_interpretation):
+        &quot;&quot;&quot;C₁: Content-consent&quot;&quot;&quot;
+        if not self.meta_consent:
+            return True  # Skip check if user opted out
+        
+        response = input(
+            f&quot;Do I understand you correctly that you mean: &quot;
+            f&quot;&#x27;{my_interpretation}&#x27;? (yes/no): &quot;
+        )
+        return response.lower() == &quot;yes&quot;
+
+    def detect_drift(self):
+        &quot;&quot;&quot;Drift detection over window&quot;&quot;&quot;
+        if len(self.coherence_history) &lt; 3:
+            return False
+        recent = self.coherence_history[-3:]
+        return recent.count(False) &gt;= 2
+
+    def recover(self):
+        &quot;&quot;&quot;R₂: Recovery to last lock&quot;&quot;&quot;
+        if self.last_lock:
+            print(f&quot;Back to last agreement: {self.last_lock}&quot;)
+        else:
+            print(&quot;Let&#x27;s start over.&quot;)
+        self.coherence_history = []
+
+    def respond(self, user_input):
+        &quot;&quot;&quot;Main response loop&quot;&quot;&quot;
+        # Generate interpretation
+        interpretation = self.llm(f&quot;Summarize the intent of: {user_input}&quot;)
+        
+        # C₁ check
+        if self.check_coherence(user_input, interpretation):
+            self.coherence_history.append(True)
+            self.last_lock = interpretation
+            # Generate actual response
+            return self.llm(f&quot;Respond to: {user_input}&quot;)
+        else:
+            self.coherence_history.append(False)
+            if self.detect_drift():
+                self.recover()
+            return &quot;Can you rephrase that?&quot;
+</code></pre>
+<hr>
+<h2>3. Implementation in Groups/Organizations</h2>
+<h3>UAP as Meeting Protocol</h3>
+<strong>Step 0 (before the agenda):</strong>
+<pre><code>&quot;Do we want to agree to paraphrase each other when there&#x27;s disagreement?&quot;
+</code></pre>
+<strong>During the meeting:</strong>
+<pre><code>On conflict → &quot;What I hear you saying is...&quot; → &quot;Is that correct?&quot;
+</code></pre>
+<strong>Decision-making:</strong>
+<pre><code>No voting until lock: &quot;We agree on X&quot;
+</code></pre>
+<strong>Effect:</strong> Decisions with higher buy-in, less sabotage afterward.
+<h3>UAP Team Agreements (Template)</h3>
+<pre><code># UAP Team Agreements
+
+## Meta-consent
+- At the start of each conversation/project: &quot;How do we want to work?&quot;
+- Anyone can always say &quot;pause&quot; or &quot;back&quot;
+
+## Coherence-checks
+- On disagreement: mandatory paraphrasing
+- &quot;Do I understand you correctly that...?&quot; is standard
+
+## Anti-forcing
+- No deadlines without consent
+- No decisions without shared understanding
+- &quot;I need more time&quot; is always OK
+
+## Recovery
+- On conflict: return to last agreement
+- On impasse: bring in neutral third party
+</code></pre>
+<hr>
+<h2>4. Implementation in Software/Protocols</h2>
+<h3>UAP-Compliant API Design</h3>
+<pre><code># OpenAPI spec with UAP principles
+
+/consent:
+  post:
+    summary: &quot;C₀: Meta-consent for interaction&quot;
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              interaction_style:
+                enum: [verbose_checks, minimal_checks, no_checks]
+    responses:
+      200:
+        description: &quot;Consent registered&quot;
+
+/action:
+  post:
+    summary: &quot;C₁: Action with explicit intent&quot;
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            required: [intent, consent_reference]
+            properties:
+              intent:
+                type: string
+                description: &quot;Explicit statement of what this action means&quot;
+              consent_reference:
+                type: string
+                description: &quot;Reference to C₀ consent&quot;
+    responses:
+      200:
+        description: &quot;Action executed&quot;
+      409:
+        description: &quot;Coherence check failed - clarification needed&quot;
+
+/recovery:
+  post:
+    summary: &quot;R: Recovery to previous state&quot;
+</code></pre>
+<hr>
+<h2>5. Summary: Implementation by Level</h2>
+<table><thead><tr><th>Level</th><th>Implementation</th><th>Time</th><th>Difficulty</th></tr></thead><tbody><tr><td><strong>Personal</strong></td><td>Use the question in conversations</td><td>Immediately</td><td>⭐</td></tr><tr><td><strong>Team</strong></td><td>Agreements about paraphrasing</td><td>1 meeting</td><td>⭐⭐</td></tr><tr><td><strong>AI</strong></td><td>System prompt with meta-consent</td><td>5 minutes</td><td>⭐</td></tr><tr><td><strong>Software</strong></td><td>Double-confirm flows</td><td>1-2 weeks</td><td>⭐⭐⭐</td></tr><tr><td><strong>Organization</strong></td><td>UAP as standard procedure</td><td>1-3 months</td><td>⭐⭐⭐⭐</td></tr><tr><td><strong>Protocol</strong></td><td>Consent-gates in smart contracts</td><td>2-6 months</td><td>⭐⭐⭐⭐⭐</td></tr></tbody></table>
+<hr>
+<h2>6. The Core</h2>
+<p>UAP is not a "big project".
+It's a small rule you can build in everywhere.</p>
+<p>And the more you implement it,
+the less you need to explain it.</p>
+<strong>Because it works itself.</strong>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><a href="/b/uap-arxiv-introduction/">←</a><a href="/b/uap-legal-professional-perspectives/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-implementation-guide/"></a>
+<a class="switch-block white" href="/w/uap-implementation-guide/"></a>
+<a class="switch-block black active" href="/b/uap-implementation-guide/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

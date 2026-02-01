@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP Protocol Template — UAP / Framebreaker</title>
+<meta name="description" content=" Design Guide for UAP-Conformant Protocols
+
+---
+
+ Overview
+
+This document provides a template for designing new protocols that conform to UAP principles.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-protocol-template/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP Protocol Template</h1>
+<h2>Design Guide for UAP-Conformant Protocols</h2>
+<hr>
+<h2>Overview</h2>
+<p>This document provides a template for designing new protocols that conform to UAP principles.</p>
+<p>A UAP-conformant protocol is more likely to:
+<ul><li>Achieve stable operation</li><li>Resist common attack vectors</li><li>Recover gracefully from failures</li><li>Scale without losing coherence</li></ul>
+<hr></p>
+<h2>The Six Required Elements</h2>
+<p>Every UAP-conformant protocol must implement:</p>
+<pre><code>P := (Δ, C, Σ, F⁻, L, R)
+</code></pre>
+<table><thead><tr><th>Element</th><th>Symbol</th><th>Must Answer</th></tr></thead><tbody><tr><td>Distinction</td><td>Δ</td><td>How are parties identified and differentiated?</td></tr><tr><td>Consent</td><td>C</td><td>What is the acknowledgment gate?</td></tr><tr><td>Coherence</td><td>Σ</td><td>How is mutual understanding verified?</td></tr><tr><td>Anti-forcing</td><td>F⁻</td><td>What prevents unilateral state changes?</td></tr><tr><td>Lock</td><td>L</td><td>What indicates successful stable state?</td></tr><tr><td>Recovery</td><td>R</td><td>How does the system return from failure?</td></tr></tbody></table>
+<hr>
+<h2>Template: Design Your Protocol</h2>
+<h3>Step 0 — Meta-Consent (C₀): Consent to Engage</h3>
+<p>Before substantive interpretation, probing, or long-form reasoning:</p>
+<strong>Ask for consent to the interaction mode:</strong>
+<ul><li>"Do you want clarification checks ('Do I understand you correctly?'), or do you prefer direct answers?"</li><li>"Is now a good moment to engage on this topic?"</li></ul>
+<strong>Rules:</strong>
+<ul><li>If C₀ is not granted: do not escalate. Offer deferral or exit.</li><li>Re-ask C₀ when context changes (new topic, emotional shift, prolonged session).</li></ul>
+<strong>Rationale:</strong>
+<ul><li>Prevents process-level forcing (implicit obligation to respond).</li></ul>
+<strong>Your protocol:</strong>
+<pre><code>C₀ = _______________________________________
+</code></pre>
+<hr>
+<h3>1. Distinction (Δ)</h3>
+<strong>Question:</strong> How do parties know they are interacting with distinct entities?
+<strong>Design choices:</strong>
+<ul><li>[ ] Identity tokens (session IDs, user IDs)</li><li>[ ] Cryptographic keys (public key, certificates)</li><li>[ ] Physical boundaries (IP addresses, ports)</li><li>[ ] Semantic boundaries (message types, roles)</li></ul>
+<strong>Your protocol:</strong>
+<pre><code>Δ = _______________________________________
+</code></pre>
+<strong>Warning signs:</strong>
+<ul><li>No clear party boundaries → identity confusion attacks</li><li>Shared identities → impersonation vulnerabilities</li></ul>
+<hr>
+<h3>2. Consent (C)</h3>
+<strong>Question:</strong> What is the explicit acknowledgment moment?
+<strong>Design choices:</strong>
+<ul><li>[ ] Explicit request-response (SYN-ACK)</li><li>[ ] Approval workflow (pull request)</li><li>[ ] Authorization grant (OAuth consent)</li><li>[ ] Threshold consensus (quorum)</li></ul>
+<strong>Your protocol:</strong>
+<pre><code>C = _______________________________________
+</code></pre>
+<strong>Warning signs:</strong>
+<ul><li>No acknowledgment gate → unauthorized actions possible</li><li>Implicit consent assumed → IMPLICIT = ABSENT</li></ul>
+<hr>
+<h3>3. Coherence (Σ)</h3>
+<strong>Question:</strong> How do parties verify they understand each other?
+<strong>Design choices:</strong>
+<ul><li>[ ] Checksums / hashes</li><li>[ ] Sequence numbers</li><li>[ ] State comparison</li><li>[ ] Schema validation</li><li>[ ] Semantic verification</li></ul>
+<strong>Your protocol:</strong>
+<pre><code>Σ = _______________________________________
+</code></pre>
+<strong>Warning signs:</strong>
+<ul><li>No verification → state desynchronization</li><li>One-sided verification → asymmetric failures</li></ul>
+<hr>
+<h3>4. Anti-Forcing (F⁻)</h3>
+<strong>Question:</strong> What prevents one party from constraining another without acknowledgment?
+<strong>Design choices:</strong>
+<ul><li>[ ] Rate limiting</li><li>[ ] Scope restrictions</li><li>[ ] Flow control</li><li>[ ] Permission boundaries</li><li>[ ] Timeout mechanisms</li></ul>
+<strong>Your protocol:</strong>
+<pre><code>F⁻ = _______________________________________
+</code></pre>
+<strong>Warning signs:</strong>
+<ul><li>No limits → resource exhaustion attacks</li><li>No scope → privilege escalation</li></ul>
+<hr>
+<h3>5. Lock (L)</h3>
+<strong>Question:</strong> What indicates successful stable state?
+<strong>Design choices:</strong>
+<ul><li>[ ] Explicit state flag (ESTABLISHED)</li><li>[ ] Completion message (200 OK)</li><li>[ ] Merged state (Git merge commit)</li><li>[ ] Shared secret (session key)</li></ul>
+<strong>Your protocol:</strong>
+<pre><code>L = _______________________________________
+</code></pre>
+<strong>Warning signs:</strong>
+<ul><li>No clear success state → ambiguous completion</li><li>Unstable lock → state flapping</li></ul>
+<hr>
+<h3>6. Recovery (R)</h3>
+<strong>Question:</strong> How does the system return from failure?
+<strong>Goal:</strong> Restore coherence when Σ degrades or when forcing-risk increases.
+<h4>R0: Detection (Trigger)</h4>
+<p>Recovery activates when drift is detected:
+<ul><li>Σ falls below threshold</li><li>Mismatch in intent/state</li><li>Repeated misunderstandings</li><li>Uncertainty exceeds acceptable level</li></ul>
+<strong>Recovery is mandatory for UAP-conformance.</strong> Without R, protocols risk deadlocks or zombie-states.</p>
+<h4>R1: Monad-Level Re-Sync (Minimum Viable Repair)</h4>
+<p>Return to minimal coherence-check via explicit acknowledgment gate.</p>
+<strong>Protocol action:</strong> Paraphrase intent and request confirmation.
+<strong>Human expression:</strong> "Do I understand you correctly?"  
+(Σ + C + R in one step; anti-forcing via question form)
+<strong>Design choices:</strong>
+<ul><li>[ ] Retry mechanism</li><li>[ ] Rollback capability</li><li>[ ] Error signaling with state summary</li><li>[ ] Escalation path</li></ul>
+<h4>R2: Silence-Mode (Anti-Forcing Safe Mode)</h4>
+<p>Sometimes the least-forcing recovery is: temporarily make no state changes.</p>
+<strong>When to use:</strong> When uncertainty is high and any action risks Fₙ > 0.
+<strong>Protocol action (example):</strong>
+1. Declare <code>PAUSE</code> (no further actions)
+2. Request clarification or offer choice menu (opt-in)
+3. Resume only after explicit acknowledgment
+<strong>Design choices:</strong>
+<ul><li>[ ] Timeout with graceful pause</li><li>[ ] Backoff with status signal</li><li>[ ] Hold state pending confirmation</li></ul>
+<strong>Conformance rule:</strong>  
+Recovery may never introduce forcing. If uncertainty > threshold: choose R1 or R2 before further state-changes.
+<strong>Your protocol:</strong>
+<pre><code>R = _______________________________________
+R1 (re-sync) = _____________________________
+R2 (silence-mode) = ________________________
+</code></pre>
+<strong>Warning signs:</strong>
+<ul><li>No recovery → permanent deadlock</li><li>No signaling → silent failures</li><li>Recovery that forces → violation of Fₙ = 0</li></ul>
+<hr>
+<h2>Wellformedness Checklist</h2>
+<p>A protocol is UAP-conformant iff:</p>
+<ul><li>[ ] <strong>C1:</strong> All state-changing interactions pass through acknowledgment gate</li><li>[ ] <strong>C2:</strong> Forcing filter removes non-acknowledged components</li><li>[ ] <strong>C3:</strong> Coherence is measured at each significant transition</li><li>[ ] <strong>C4:</strong> Lock state detector identifies successful completion</li><li>[ ] <strong>C5:</strong> Drift below threshold triggers recovery</li></ul>
+<strong>Score:</strong> ___/5
+<ul><li>5/5: Fully UAP-conformant</li><li>4/5: Minor vulnerability</li><li>3/5: Structural weakness</li><li><3/5: Fundamentally fragile</li></ul>
+<hr>
+<h2>Example: TCP</h2>
+<pre><code>Δ  = IP addresses + ports (socket pairs)
+C  = Three-way handshake (SYN → SYN-ACK → ACK)
+Σ  = Sequence numbers + checksums
+F⁻ = Flow control + congestion avoidance
+L  = ESTABLISHED state
+R  = Retransmission + RST + timeout
+</code></pre>
+<strong>Score:</strong> 5/5 ✓
+<hr>
+<h2>Example: UDP</h2>
+<pre><code>Δ  = IP addresses + ports
+C  = (none)
+Σ  = Checksum (optional)
+F⁻ = (none)
+L  = (none)
+R  = (none)
+</code></pre>
+<strong>Score:</strong> 1/5
+<strong>Result:</strong> UDP provides no reliability guarantees. Stability must be implemented at application layer.
+<hr>
+<h2>Anti-Patterns</h2>
+<h3>1. "Implicit Consent"</h3>
+<pre><code>// BAD: Assuming consent
+if (request_received) {
+    process(request);  // No acknowledgment!
+}
+
+// GOOD: Explicit consent gate
+if (request_received &amp;&amp; acknowledged(request)) {
+    process(request);
+}
+</code></pre>
+<h3>2. "Fire and Forget"</h3>
+<pre><code>// BAD: No verification
+send(data);
+
+// GOOD: Verify coherence
+send(data);
+ack = await_acknowledgment();
+if (!ack) trigger_recovery();
+</code></pre>
+<h3>3. "Unlimited Power"</h3>
+<pre><code>// BAD: No forcing prevention
+execute_all_permissions(user);
+
+// GOOD: Scoped permissions
+execute_within_scope(user, granted_scope);
+</code></pre>
+<hr>
+<h2>Protocol Composition</h2>
+<p>When combining protocols:</p>
+<pre><code>P₁ ∘ P₂ := (
+    Δ₁ ∪ Δ₂,           // Union of distinctions
+    C₁ ∧ C₂,           // Both must consent
+    min(Σ₁, Σ₂),       // Weakest coherence
+    F⁻₁ ∘ F⁻₂,         // Chain filters
+    L₁ ∧ L₂,           // Both must lock
+    R₁ ; R₂            // Sequential recovery
+)
+</code></pre>
+<p>Composed protocols are UAP-conformant if both components are.</p>
+<hr>
+<h2>Final Checklist</h2>
+<p>Before deploying your protocol:</p>
+<ul><li>[ ] Can I explain the consent gate in one sentence?</li><li>[ ] What happens if acknowledgment never arrives?</li><li>[ ] How does a malicious party try to force state changes?</li><li>[ ] What triggers recovery?</li><li>[ ] How do I know when we're in a stable state?</li></ul>
+If you can't answer these, the protocol isn't ready.
+<hr>
+<em>"Ask before assuming. Verify before proceeding. Leave space for 'no.'"</em>
+<p>🜂</p>
+</article>
+<nav class="nav"><span></span><span></span></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-protocol-template/"></a>
+<a class="switch-block white" href="/w/uap-protocol-template/"></a>
+<a class="switch-block black" href="/b/uap-protocol-template/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

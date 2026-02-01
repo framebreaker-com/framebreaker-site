@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP in TCP/IP — UAP / Framebreaker</title>
+<meta name="description" content=" The Internet&#x27;s Consent Protocol
+
+---
+
+ Overview
+
+TCP Transmission Control Protocol is the backbone of internet communication.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-in-tcpip/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP in TCP/IP</h1>
+<h2>The Internet's Consent Protocol</h2>
+<hr>
+<h2>Overview</h2>
+<p>TCP (Transmission Control Protocol) is the backbone of internet communication. It's also a perfect instantiation of UAP — designed for reliable data transfer through explicit acknowledgment.</p>
+<hr>
+<h2>The Three-Way Handshake = C₀ + C₁</h2>
+<pre><code>Client → Server:  SYN (Can we talk?)        = C₀
+Server → Client:  SYN-ACK (Yes, I hear you) = C₀ + C₁
+Client → Server:  ACK (Confirmed)           = Lock
+</code></pre>
+<strong>No data is sent until both parties consent to the connection.</strong>
+<hr>
+<h2>UAP Element Mapping</h2>
+<table><thead><tr><th>UAP Element</th><th>TCP Mechanism</th><th>Function</th></tr></thead><tbody><tr><td><strong>C₀ (meta-consent)</strong></td><td>SYN</td><td>Request to establish connection</td></tr><tr><td><strong>C₁ (content-consent)</strong></td><td>ACK</td><td>Acknowledgment of each packet</td></tr><tr><td><strong>Σ (coherence)</strong></td><td>Sequence numbers</td><td>Both sides track what's been understood</td></tr><tr><td><strong>F⁻ (anti-forcing)</strong></td><td>Flow control</td><td>Sender cannot overwhelm receiver</td></tr><tr><td><strong>L (lock)</strong></td><td>ESTABLISHED state</td><td>Stable connection after handshake</td></tr><tr><td><strong>R (recovery)</strong></td><td>Retransmission</td><td>Resend on missing ACK</td></tr></tbody></table>
+<hr>
+<h2>Why TCP Works</h2>
+<h3>1. Explicit Consent</h3>
+<ul><li>Connection only established after mutual agreement</li><li>No "fire and forget" — every packet must be acknowledged</li></ul>
+<h3>2. Coherence Tracking</h3>
+<ul><li>Sequence numbers ensure both sides agree on what's been received</li><li>Out-of-order packets are reordered</li><li>Missing packets are detected</li></ul>
+<h3>3. Anti-Forcing (Flow Control)</h3>
+<ul><li>Receiver advertises window size (how much it can handle)</li><li>Sender respects this limit</li><li>No party can overwhelm the other</li></ul>
+<h3>4. Recovery</h3>
+<ul><li>Missing ACK triggers retransmission</li><li>Connection can recover from packet loss</li><li>Timeout leads to connection reset (R₃)</li></ul>
+<hr>
+<h2>What Happens Without UAP (UDP)</h2>
+<p>UDP (User Datagram Protocol) skips consent:</p>
+<table><thead><tr><th>Feature</th><th>TCP</th><th>UDP</th></tr></thead><tbody><tr><td>Consent</td><td>Yes (handshake)</td><td>No</td></tr><tr><td>Acknowledgment</td><td>Yes</td><td>No</td></tr><tr><td>Flow control</td><td>Yes</td><td>No</td></tr><tr><td>Recovery</td><td>Yes</td><td>No</td></tr></tbody></table>
+<strong>Result:</strong> UDP is faster but unreliable. Used only where loss is acceptable (video streaming, games).
+<p>For anything requiring stability: TCP (= UAP).</p>
+<hr>
+<h2>Failure Modes</h2>
+<table><thead><tr><th>Failure</th><th>UAP Translation</th></tr></thead><tbody><tr><td>SYN flood attack</td><td>Meta-consent abuse (fake C₀s)</td></tr><tr><td>Connection timeout</td><td>Σ → 0, R fails</td></tr><tr><td>RST packet</td><td>R₃ (forced exit)</td></tr><tr><td>Congestion collapse</td><td>System-wide F⁻ failure</td></tr></tbody></table>
+<hr>
+<h2>Design Lessons</h2>
+<p>TCP teaches us:</p>
+<p>1. <strong>Acknowledgment is not overhead — it's stability</strong>
+2. <strong>Flow control prevents forcing</strong>
+3. <strong>Recovery must be built in, not bolted on</strong>
+4. <strong>Consent at connection + consent per packet = robust</strong></p>
+<hr>
+<h2>The Quote</h2>
+<blockquote><p><strong>"The internet runs on consent. Every packet says 'Do I understand you correctly?' and waits for 'Yes.'"</strong></p></blockquote>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><a href="/b/uap-in-quantum-mechanics/">←</a><a href="/b/uap-protocol-checklist/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-in-tcpip/"></a>
+<a class="switch-block white" href="/w/uap-in-tcpip/"></a>
+<a class="switch-block black active" href="/b/uap-in-tcpip/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

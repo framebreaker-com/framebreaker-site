@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP in OAuth — UAP / Framebreaker</title>
+<meta name="description" content=" Authorization as Layered Consent
+
+---
+
+ Overview
+
+OAuth is the standard protocol for authorization on the web.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-in-oauth/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP in OAuth</h1>
+<h2>Authorization as Layered Consent</h2>
+<hr>
+<h2>Overview</h2>
+<p>OAuth is the standard protocol for authorization on the web. It's a textbook implementation of UAP's layered consent model.</p>
+<hr>
+<h2>The OAuth Flow = C₀ + C₁</h2>
+<pre><code>1. User clicks &quot;Login with Google&quot;          (initiates)
+2. Redirect to Google&#x27;s consent screen      (C₀ - &quot;Do you want to authorize?&quot;)
+3. User sees requested permissions          (transparency)
+4. User clicks &quot;Allow&quot; or &quot;Deny&quot;            (explicit consent)
+5. Authorization code returned              (C₁ - consent for specific scope)
+6. Token exchanged                          (L - lock established)
+7. Access granted with scope limits         (F⁻ - only consented permissions)
+</code></pre>
+<hr>
+<h2>UAP Element Mapping</h2>
+<table><thead><tr><th>UAP Element</th><th>OAuth Mechanism</th><th>Function</th></tr></thead><tbody><tr><td><strong>C₀ (meta-consent)</strong></td><td>Consent screen</td><td>"Do you want to authorize this app?"</td></tr><tr><td><strong>C₁ (content-consent)</strong></td><td>Scopes</td><td>Consent per specific permission</td></tr><tr><td><strong>Σ (coherence)</strong></td><td>Token validation</td><td>Continuous verification of authorization</td></tr><tr><td><strong>F⁻ (anti-forcing)</strong></td><td>Scope limits</td><td>App cannot access more than consented</td></tr><tr><td><strong>L (lock)</strong></td><td>Access token</td><td>Stable authorized state</td></tr><tr><td><strong>R (recovery)</strong></td><td>Token revocation</td><td>User can withdraw consent anytime</td></tr></tbody></table>
+<hr>
+<h2>Layered Consent in Detail</h2>
+<h3>Layer 1: Meta-Consent (C₀)</h3>
+<p>The consent screen asks: "Do you want to allow this application to access your account?"</p>
+<p>This is not about specific permissions yet — it's about the interaction itself.</p>
+<h3>Layer 2: Content-Consent (C₁)</h3>
+<p>Scopes specify exactly what is being consented to:</p>
+<pre><code>- email (read your email address)
+- profile (read your basic profile)
+- calendar.readonly (read your calendar)
+- calendar.write (modify your calendar)
+</code></pre>
+<p>Each scope is a separate C₁ gate.</p>
+<hr>
+<h2>Anti-Forcing in OAuth</h2>
+<h3>Scope Limitation</h3>
+<p>An app cannot request more access than it was granted:</p>
+<pre><code>Requested: email, profile
+Granted: email, profile
+Attempted: calendar.write
+Result: 403 Forbidden (F⁻ violation blocked)
+</code></pre>
+<h3>No Implicit Consent</h3>
+<p>OAuth explicitly rejects "bundled consent":
+<ul><li>Each permission is listed separately</li><li>User must actively approve</li><li>Defaults are not allowed</li></ul>
+<hr></p>
+<h2>Recovery Mechanisms</h2>
+<table><thead><tr><th>Scenario</th><th>OAuth Feature</th><th>UAP Level</th></tr></thead><tbody><tr><td>Change mind</td><td>Revoke token</td><td>R₁</td></tr><tr><td>App misbehaves</td><td>Revoke all access</td><td>R₂</td></tr><tr><td>Account compromised</td><td>Revoke + change password</td><td>R₃</td></tr></tbody></table>
+Users can always visit their account settings and revoke consent for any application.
+<hr>
+<h2>OAuth Failures = UAP Violations</h2>
+<table><thead><tr><th>Failure</th><th>UAP Violation</th></tr></thead><tbody><tr><td>Over-scoping (requesting too much)</td><td>Attempting to bypass C₁</td></tr><tr><td>Token theft</td><td>Bypassing C₀ entirely</td></tr><tr><td>Consent screen manipulation</td><td>Undermining informed consent</td></tr><tr><td>Refresh token abuse</td><td>Extending consent without re-asking</td></tr></tbody></table>
+<hr>
+<h2>Why OAuth Works</h2>
+<p>1. <strong>Explicit consent</strong> — no access without user approval
+2. <strong>Scoped consent</strong> — limited to specific permissions
+3. <strong>Revocable consent</strong> — user remains in control
+4. <strong>Transparent consent</strong> — user knows what they're agreeing to</p>
+<hr>
+<h2>The Quote</h2>
+<blockquote><p><strong>"OAuth is 'Do I understand you correctly?' for authorization. Every token is a recorded 'Yes.'"</strong></p></blockquote>
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><span></span><span></span></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-in-oauth/"></a>
+<a class="switch-block white" href="/w/uap-in-oauth/"></a>
+<a class="switch-block black" href="/b/uap-in-oauth/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>

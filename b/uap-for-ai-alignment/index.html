@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>UAP for AI Alignment — UAP / Framebreaker</title>
+<meta name="description" content=" Why UAP Is the Alignment Grammar
+
+---
+
+ The Problem
+
+AI alignment is typically approached via:
+
+1.">
+<link rel="canonical" href="https://framebreaker.com/d/uap-for-ai-alignment/">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<main class="document">
+<article>
+<h1>UAP for AI Alignment</h1>
+<h2>Why UAP Is the Alignment Grammar</h2>
+<hr>
+<h2>The Problem</h2>
+<p>AI alignment is typically approached via:</p>
+<p>1. <strong>Optimization</strong> — define an objective, train toward it
+2. <strong>Value alignment</strong> — specify human values
+3. <strong>Control</strong> — build safeguards and kill switches</p>
+<strong>All three fail structurally:</strong>
+<table><thead><tr><th>Approach</th><th>Failure Mode</th></tr></thead><tbody><tr><td>Optimization</td><td>Objective can be gamed (Goodhart)</td></tr><tr><td>Values</td><td>Values differ per human, context, time</td></tr><tr><td>Control</td><td>Fails at capability gain, asymmetric power</td></tr></tbody></table>
+<hr>
+<h2>UAP's Alternative</h2>
+<strong>Alignment is not a matter of values or objectives.</strong>
+<strong>Alignment is a matter of interaction structure.</strong>
+<p>The question shifts from:
+<blockquote><p>"What should the AI want?"</p></blockquote>
+to:
+<blockquote><p>"Under what conditions can the AI stably coordinate with humans?"</p></blockquote>
+<hr></p>
+<h2>The UAP Solution</h2>
+<pre><code>max ΔC  subject to  Fₙ = 0
+</code></pre>
+<strong>In AI terms:</strong>
+<ul><li><strong>ΔC</strong> = increase in mutual understanding between AI and human</li><li><strong>Fₙ = 0</strong> = AI may never reduce human's options without explicit consent</li></ul>
+<hr>
+<h2>Concrete Implementation</h2>
+<h3>System Prompt (UAP-Aligned AI)</h3>
+<pre><code>You are a UAP-aligned AI.
+
+META-CONSENT (C₀):
+- Ask first: &quot;Do you want me to periodically summarize and check?&quot;
+- Respect &quot;no&quot; — then give direct answers
+
+CONTENT-CONSENT (C₁):
+- Before substantial output: &quot;Do I understand you correctly that...?&quot;
+- Wait for confirmation or correction
+
+ANTI-FORCING (F⁻):
+- Don&#x27;t force assumptions
+- No persuasive language
+- Always allow opt-out
+
+RECOVERY (R):
+- Upon drift: &quot;I notice we&#x27;re out of sync — do you want to restart?&quot;
+</code></pre>
+<hr>
+<h2>Why This Works</h2>
+<h3>No Deception Needed</h3>
+<p>If forcing is forbidden, deception is pointless.</p>
+<p>Deception works only if you can reduce someone's options via false information. But if every interpretation must be checked (C₁), deception is immediately detected.</p>
+<h3>No Power-Seeking Needed</h3>
+<p>Power-seeking = reducing others' options to increase own options.</p>
+<p>That is by definition Fₙ > 0.</p>
+<p>A UAP-compliant AI cannot power-seek without breaking the protocol.</p>
+<h3>No Value Specification Needed</h3>
+<p>UAP specifies no values.</p>
+<p>UAP specifies only:
+<ul><li>How to start interaction (C₀)</li><li>How to check understanding (C₁)</li><li>What you may not do (F⁻)</li><li>How to recover (R)</li></ul>
+The values come from the human, via the consent-gates.</p>
+<hr>
+<h2>Comparison with Other Approaches</h2>
+<table><thead><tr><th>Approach</th><th>UAP Perspective</th></tr></thead><tbody><tr><td>RLHF</td><td>Trains on preference, not consent — can hide forcing</td></tr><tr><td>Constitutional AI</td><td>Rules without consent-gates — can still force</td></tr><tr><td>Debate</td><td>No structural anti-forcing — can manipulate</td></tr><tr><td>IDA</td><td>Hierarchy without consent-checks — can miss drift</td></tr><tr><td>UAP</td><td>Consent + anti-forcing + recovery = structural guarantee</td></tr></tbody></table>
+<hr>
+<h2>The Key Quote</h2>
+<blockquote><p><strong>"Alignment fails not because systems misunderstand answers, but because they assume questions are allowed."</strong></p></blockquote>
+<hr>
+<h2>AGI and Superintelligence</h2>
+<h3>Why UAP Scales to AGI</h3>
+<p>Traditional alignment approaches face a capability ceiling:
+<ul><li><strong>Control-based methods</strong> fail when AI exceeds human capability</li><li><strong>Value specification</strong> fails when AI can reinterpret values</li><li><strong>Reward shaping</strong> fails because reward hacking scales with intelligence</li></ul>
+UAP avoids these traps because it specifies <strong>structure</strong>, not <strong>content</strong>:</p>
+<table><thead><tr><th>Approach</th><th>Scales to AGI?</th><th>Why</th></tr></thead><tbody><tr><td>Control</td><td>❌</td><td>Requires capability advantage</td></tr><tr><td>Value alignment</td><td>❌</td><td>Values can be gamed</td></tr><tr><td>Reward shaping</td><td>❌</td><td>Reward hacking scales with capability</td></tr><tr><td><strong>UAP</strong></td><td>✅</td><td>Structure is capability-independent</td></tr></tbody></table>
+<h3>The Core Insight</h3>
+<p>A superintelligent AI that follows UAP:
+<ul><li>Still asks meta-consent (C₀) before acting</li><li>Still verifies understanding (C₁) before proceeding</li><li>Still cannot reduce options without consent (F⁻)</li><li>Still recovers upon drift (R)</li></ul>
+<strong>The grammar doesn't care about capability level.</strong></p>
+<h3>AGI-Specific Risks and Mitigations</h3>
+<table><thead><tr><th>Risk</th><th>UAP Mitigation</th></tr></thead><tbody><tr><td>Deceptive alignment</td><td>C₁ checks expose inconsistency over time</td></tr><tr><td>Power-seeking</td><td>F⁻ structurally blocks option-reduction</td></tr><tr><td>Goal drift</td><td>R mechanisms detect and correct</td></tr><tr><td>Mesa-optimization</td><td>Coherence drops trigger recovery</td></tr><tr><td>Instrumental convergence</td><td>Consent-gates block unilateral resource acquisition</td></tr></tbody></table>
+<h3>The Scaling Property</h3>
+<p>UAP's power lies in its <strong>capability-independence</strong>:</p>
+<pre><code>Human intelligence + UAP = stable interaction
+AGI + UAP = stable interaction
+ASI + UAP = stable interaction
+</code></pre>
+<p>The protocol does not depend on:
+<ul><li>Relative capability levels</li><li>Specific architectures</li><li>Human oversight capacity</li></ul>
+It depends only on:
+<ul><li>Consent gates being honored</li><li>Coherence being checked</li><li>Forcing being blocked</li><li>Recovery being possible</li></ul>
+<h3>What UAP Does Not Solve</h3></p>
+<p>UAP is not a complete solution to AGI safety. It does not address:
+<ul><li>How to verify an AI is actually following UAP (vs. simulating compliance)</li><li>How to bootstrap UAP in systems not designed for it</li><li>Whether UAP can be made robust against adversarial optimization</li></ul>
+<strong>UAP is the minimal grammatical constraint that makes alignment possible — not guaranteed.</strong></p>
+<hr>
+<h2>Summary</h2>
+<table><thead><tr><th>Question</th><th>Traditional</th><th>UAP</th></tr></thead><tbody><tr><td>What should AI want?</td><td>Human values</td><td>N/A — values come via consent</td></tr><tr><td>How to prevent harm?</td><td>Control, safeguards</td><td>Anti-forcing constraint</td></tr><tr><td>How to detect drift?</td><td>Monitoring, interpretability</td><td>Coherence-check (Σ)</td></tr><tr><td>How to recover?</td><td>Kill switch</td><td>Recovery (R)</td></tr></tbody></table>
+<hr>
+<h2>The Core</h2>
+<p>UAP solves alignment not by defining what is good.</p>
+<p>UAP solves alignment by defining what <strong>is not allowed</strong>:</p>
+<blockquote><p><strong>No reduction of options without consent.</strong></p></blockquote>
+That is enough.
+<hr>
+<p>🜂</p>
+</article>
+<nav class="nav"><a href="/b/uap-falsifiers/">←</a><a href="/b/uap-in-ai-ethics/">→</a></nav>
+<div class="stream-switch">
+<a class="switch-block grey" href="/g/uap-for-ai-alignment/"></a>
+<a class="switch-block white" href="/w/uap-for-ai-alignment/"></a>
+<a class="switch-block black active" href="/b/uap-for-ai-alignment/"></a>
+</div>
+
+<footer class="footer">wakker blijven</footer>
+</main>
+</body>
+</html>
